@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5deb2
+-- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: May 22, 2024 at 09:36 PM
--- Server version: 8.0.36-0ubuntu0.20.04.1
--- PHP Version: 7.4.3-4ubuntu2.22
+-- Servidor: localhost:3306
+-- Tiempo de generación: 25-05-2024 a las 15:46:27
+-- Versión del servidor: 10.3.38-MariaDB-cll-lve
+-- Versión de PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,21 +19,21 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `proyecto`
+-- Base de datos: `dbpphits_lisandro`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `alquiler`
+-- Estructura de tabla para la tabla `alquiler`
 --
 
 CREATE TABLE `alquiler` (
-  `id` int NOT NULL,
-  `ano` year NOT NULL,
-  `mes` tinyint NOT NULL,
-  `propietario_usuario_id` int NOT NULL,
-  `inquilino_usuario_id` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `ano` year(4) NOT NULL,
+  `mes` tinyint(4) NOT NULL,
+  `propietario_usuario_id` int(11) NOT NULL,
+  `inquilino_usuario_id` int(11) NOT NULL,
   `pagado` tinyint(1) NOT NULL,
   `fecha_de_pago` date NOT NULL,
   `confirmado` tinyint(1) NOT NULL
@@ -42,11 +42,11 @@ CREATE TABLE `alquiler` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `convenios`
+-- Estructura de tabla para la tabla `convenios`
 --
 
 CREATE TABLE `convenios` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `tipo` enum('fontaneria','electricidad') NOT NULL,
   `descripcion` text NOT NULL
 ) ENGINE=InnoDB;
@@ -54,66 +54,66 @@ CREATE TABLE `convenios` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `impresiones`
+-- Estructura de tabla para la tabla `impresiones`
 --
 
 CREATE TABLE `impresiones` (
-  `id` int NOT NULL,
-  `usuario_id` int NOT NULL,
-  `convenio_id` int NOT NULL,
-  `fecha_y_hora` timestamp NOT NULL
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `convenio_id` int(11) NOT NULL,
+  `fecha_y_hora` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `incidencias`
+-- Estructura de tabla para la tabla `incidencias`
 --
 
 CREATE TABLE `incidencias` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `tipo` enum('fontaneria','electricidad') NOT NULL,
   `titulo` text NOT NULL,
   `descripcion` text NOT NULL,
   `estado` enum('nuevo','iniciado','completado','cancelado') NOT NULL,
-  `usuario_id` int NOT NULL,
-  `propiedad_id` int NOT NULL,
-  `fecha_y_hora` timestamp NOT NULL
+  `usuario_id` int(11) NOT NULL,
+  `inmueble_id` int(11) NOT NULL,
+  `fecha_y_hora` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `propiedades`
+-- Estructura de tabla para la tabla `inmuebles`
 --
 
-CREATE TABLE `propiedades` (
-  `id` int NOT NULL,
+CREATE TABLE `inmuebles` (
+  `id` int(11) NOT NULL,
   `direccion` text NOT NULL,
-  `propietario_usuario_id` int NOT NULL,
-  `inquilino_usuario_id` int NOT NULL
+  `propietario_usuario_id` int(11) NOT NULL,
+  `inquilino_usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subscripcion`
+-- Estructura de tabla para la tabla `subscripcion`
 --
 
 CREATE TABLE `subscripcion` (
-  `id` int NOT NULL,
-  `usuario_id` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
   `fecha_expiracion` date NOT NULL
 ) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuarios`
+-- Estructura de tabla para la tabla `usuarios`
 --
 
 CREATE TABLE `usuarios` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `nombre` tinytext NOT NULL,
   `apellido` tinytext NOT NULL,
   `email` mediumtext NOT NULL,
@@ -123,96 +123,96 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB;
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `alquiler`
+-- Indices de la tabla `alquiler`
 --
 ALTER TABLE `alquiler`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `convenios`
+-- Indices de la tabla `convenios`
 --
 ALTER TABLE `convenios`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `impresiones`
+-- Indices de la tabla `impresiones`
 --
 ALTER TABLE `impresiones`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `incidencias`
+-- Indices de la tabla `incidencias`
 --
 ALTER TABLE `incidencias`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `propiedades`
+-- Indices de la tabla `inmuebles`
 --
-ALTER TABLE `propiedades`
+ALTER TABLE `inmuebles`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `subscripcion`
+-- Indices de la tabla `subscripcion`
 --
 ALTER TABLE `subscripcion`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `usuarios`
+-- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `alquiler`
+-- AUTO_INCREMENT de la tabla `alquiler`
 --
 ALTER TABLE `alquiler`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `convenios`
+-- AUTO_INCREMENT de la tabla `convenios`
 --
 ALTER TABLE `convenios`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `impresiones`
+-- AUTO_INCREMENT de la tabla `impresiones`
 --
 ALTER TABLE `impresiones`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `incidencias`
+-- AUTO_INCREMENT de la tabla `incidencias`
 --
 ALTER TABLE `incidencias`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `propiedades`
+-- AUTO_INCREMENT de la tabla `inmuebles`
 --
-ALTER TABLE `propiedades`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+ALTER TABLE `inmuebles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `subscripcion`
+-- AUTO_INCREMENT de la tabla `subscripcion`
 --
 ALTER TABLE `subscripcion`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `usuarios`
+-- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
