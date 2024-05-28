@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-05-2024 a las 23:21:15
+-- Tiempo de generación: 28-05-2024 a las 23:49:02
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.1.25
 
@@ -27,6 +27,7 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `alquiler`
 --
 
+DROP TABLE IF EXISTS `alquiler`;
 CREATE TABLE `alquiler` (
   `id` int(11) NOT NULL,
   `ano` year(4) NOT NULL,
@@ -44,6 +45,7 @@ CREATE TABLE `alquiler` (
 -- Estructura de tabla para la tabla `convenios`
 --
 
+DROP TABLE IF EXISTS `convenios`;
 CREATE TABLE `convenios` (
   `id` int(11) NOT NULL,
   `tipo` enum('fontaneria','electricidad') NOT NULL,
@@ -56,6 +58,7 @@ CREATE TABLE `convenios` (
 -- Estructura de tabla para la tabla `impresiones`
 --
 
+DROP TABLE IF EXISTS `impresiones`;
 CREATE TABLE `impresiones` (
   `id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,
@@ -69,6 +72,7 @@ CREATE TABLE `impresiones` (
 -- Estructura de tabla para la tabla `incidencias`
 --
 
+DROP TABLE IF EXISTS `incidencias`;
 CREATE TABLE `incidencias` (
   `id` int(11) NOT NULL,
   `tipo` enum('fontaneria','electricidad') NOT NULL,
@@ -93,6 +97,7 @@ INSERT INTO `incidencias` (`id`, `tipo`, `titulo`, `descripcion`, `estado`, `usu
 -- Estructura de tabla para la tabla `inmuebles`
 --
 
+DROP TABLE IF EXISTS `inmuebles`;
 CREATE TABLE `inmuebles` (
   `id` int(11) NOT NULL,
   `direccion` text NOT NULL,
@@ -114,6 +119,7 @@ INSERT INTO `inmuebles` (`id`, `direccion`, `propietario_usuario_id`, `inquilino
 -- Estructura de tabla para la tabla `subscripcion`
 --
 
+DROP TABLE IF EXISTS `subscripcion`;
 CREATE TABLE `subscripcion` (
   `id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,
@@ -126,6 +132,7 @@ CREATE TABLE `subscripcion` (
 -- Estructura de tabla para la tabla `usuarios`
 --
 
+DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `nombre` tinytext NOT NULL,
