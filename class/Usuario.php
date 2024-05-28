@@ -51,12 +51,12 @@ class Usuario {
         return $this->telefono;
     }
 
-    public function getPropiedades() {
-        return $this->propiedades;
+    public function getInmuebles() {
+        return $this->inmuebles;
     }
 
-    public function agregarPropiedad($propiedad) {
-        $this->propiedades[] = $propiedad;
+    public function agregarInmueble($inmueble) {
+        $this->inmuebles[] = $inmueble;
     }
 
 }
