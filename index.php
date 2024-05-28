@@ -8,7 +8,7 @@ spl_autoload_register(function ($class) {
 require 'header.php';
 
 //TODO: Quitar esta prueba para verificar si se puede instanciar un usuario
-$usuario = new Usuario(1);
+$usuario = Usuario::obtenerUsuarioExistente(1);
 echo"<pre>";
 var_dump($usuario);
 echo"</pre>";

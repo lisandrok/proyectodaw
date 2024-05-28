@@ -9,26 +9,13 @@ class Usuario {
     private $telefono;
     private $inmuebles = array(); //Aqui se guardan los inmuebles del usuario
 
-    public function __construct($id) {
-
-        //Obtengo los datos del usuario desde la db
-        $consulta = Conexion::consulta("SELECT id, nombre, apellido, email, telefono FROM usuarios WHERE id=" . $id);
-
-        foreach ($consulta as $fila) {
-            $this->id = $fila['id'];
-            $this->nombre = $fila['nombre'];
-            $this->apellido = $fila['apellido'];
-            $this->email = $fila['email'];
-            $this->telefono = $fila['telefono'];
-        }
-
-        //Obtengo los inmuebles del usuario
-        $consulta = Conexion::consulta("SELECT id, direccion, inquilino_usuario_id FROM inmuebles WHERE propietario_usuario_id=" . $id);
-
-        //TODO: el array inmuebles debe ser llenado con inmuebles en vez de direcciones
-        foreach ($consulta as $fila) {
-            $this->inmuebles[] = $fila['direccion'];
-        }
+    public function __construct($id, $nombre, $apellido, $email, $telefono, $inmuebles) {
+        $this->id = $id;
+        $this->nombre = $nombre;
+        $this->apellido = $apellido;
+        $this->email = $email;
+        $this->telefono = $telefono;
+        $this->inmuebles = $inmuebles;
     }
 
     public function getId() {
@@ -68,5 +55,23 @@ class Usuario {
             }
         } 
         return false;
+    }
+
+    public static function obtenerUsuarioExistente($id) {
+        //Primero obtengo los inmuebles del usuario ya que debo utilizarlos para crear el usuario
+        $consulta = Conexion::consulta("SELECT id, direccion, inquilino_usuario_id FROM inmuebles WHERE propietario_usuario_id=" . $id);
+
+        foreach ($consulta as $fila) {
+            $inmueble = Inmueble::obtenerInmuebleExistente($fila["id"]);
+            $inmuebles[] = $inmueble;
+        }
+
+        //Obtengo los datos del usuario desde la db
+        $consulta = Conexion::consulta("SELECT id, nombre, apellido, email, telefono FROM usuarios WHERE id=" . $id);
+
+        foreach ($consulta as $fila) {
+            $usuario = new Usuario($fila['id'], $fila['nombre'], $fila['apellido'], $fila['email'], $fila['telefono'], $inmuebles);
+        }
+        return $usuario;
     }
 }
