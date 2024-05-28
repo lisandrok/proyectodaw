@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (Usuario::validarUsuario($email, $contrasena)) {
         $_SESSION['email'] = $email;
+        $_SESSION['usuario'] = serialize(Usuario::obtenerUsuarioExistente(Usuario::validarUsuario($email, $contrasena)));
         header('Location: tablero.php'); //redirecciona al tablero de control
         exit();
     } else {

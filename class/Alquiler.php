@@ -17,6 +17,33 @@ class Alquiler {
         $this->pagado = $pagado;
         $this->fecha_de_pago = $fecha_de_pago;
         $this->confirmado = $confirmado;
+    }
 
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getAno() {
+        return $this->ano;
+    }
+
+    public function getPropietario() {
+        return $this->propietario;
+    }
+
+    public function getInquilino() {
+        return $this->inquilino;
+    }
+
+    public function getPagado() {
+        return $this->pagado;
+    }
+
+    public function getFechaDePago() {
+        return $this->fecha_de_pago;
+    }
+
+    public function getConfirmado() {
+        return $this->confirmado;
     }
 }

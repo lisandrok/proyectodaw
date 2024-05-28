@@ -12,4 +12,15 @@ class Convenio {
         $this->descripcion = $descripcion;
     }
 
+    public function getId () {
+        return $this->id;
+    }
+
+    public function getTipo () {
+        return $this->tipo;
+    }
+
+    public function getDescripcion () {
+        return $this->descripcion;
+    }
 }

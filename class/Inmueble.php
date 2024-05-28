@@ -14,6 +14,22 @@ class Inmueble {
         $this->incidencias = $incidencias;
     }
 
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getDireccion() {
+        return $this->direccion;
+    }
+
+    public function getInquilino() {
+        return $this->inquilino;
+    }
+
+    public function getIncidencias() {
+        return $this->incidencias;
+    }
+
     public static function obtenerInmuebleExistente($id) {
         //Primero obtengo las posibles incidencias del inmueble ya que las voy a necesitar para instanciarlo
         $consulta = Conexion::consulta("SELECT id, tipo, titulo, descripcion, estado, usuario_id, fecha_y_hora FROM incidencias WHERE inmueble_id=" . $id);

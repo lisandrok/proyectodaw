@@ -12,7 +12,14 @@ spl_autoload_register(function ($class) {
 
 require 'header.php';
 
-echo "<div>TABLERO DE CONTROL de " . $_SESSION['email'] . "</div>";
+$usuario = unserialize($_SESSION['usuario']);
+//TODO: Mostrar los datos de las propiedades del usuario logueado de manera correcta
+
+echo "<div>TABLERO DE CONTROL de " . $usuario->getEmail() . "</div>";
+
+foreach ($usuario->getInmuebles() as $inmueble) {
+    echo "<pre>" . var_dump($inmueble) . "</pre>";
+}
 
 require 'footer.php'
 ?>

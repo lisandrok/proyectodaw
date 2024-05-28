@@ -17,6 +17,30 @@ class Incidencia {
         $this->fecha_y_hora = $fecha_y_hora;
     }
 
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getTipo() {
+        return $this->tipo;
+    }
+
+    public function getTitulo() {
+        return $this->titulo;
+    }
+
+    public function getDescripcion() {
+        return $this->descripcion;
+    }
+
+    public function getEstado() {
+        return $this->estado;
+    }
+
+    public function getFecha() {
+        return $this->fecha_y_hora;
+    }
+
     public static function obtenerIncidenciaExistente($id){
         $consulta = Conexion::consulta("SELECT id, tipo, titulo, descripcion, estado, fecha_y_hora FROM incidencias WHERE inmueble_id=" . $id);
 

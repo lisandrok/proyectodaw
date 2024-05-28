@@ -47,11 +47,11 @@ class Usuario {
     }
 
     public static function validarUsuario($email, $contrasena) {
-        $consulta = Conexion::consulta("SELECT contrasena FROM usuarios WHERE email='" . $email . "'");
+        $consulta = Conexion::consulta("SELECT id, contrasena FROM usuarios WHERE email='" . $email . "'");
 
         foreach ($consulta as $fila) {
             if ($fila["contrasena"] == $contrasena) {
-                return true;
+                return $fila["id"];
             }
         } 
         return false;
