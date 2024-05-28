@@ -22,9 +22,14 @@
             text-align: center;
         }
         .login {
+            background-color: #4CAF50;
+        }
+        .logout {
+            background-color: red;
+        }
+        .boton {
             margin-right: 20px;
             padding: 10px 20px;
-            background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 5px;
@@ -55,8 +60,16 @@
     <div class="precios">
         <a href="precios.php">Precios</a>
     </div>
-    <div class="login">
-        <a href="login.php">Login</a>
+
+    <?php if (isset($_SESSION['email'])) {
+        echo '<div class="boton logout">';
+        echo '<a href="logout.php">Cerrar sesi&oacuten</a>';
+    } else {
+        echo '<div class="boton login">';
+        echo '<a href="login.php">Iniciar sesi&oacuten</a>';
+    }
+
+    ?>
     </div>
 </div>
 
