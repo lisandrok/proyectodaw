@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 25-05-2024 a las 15:46:27
--- Versión del servidor: 10.3.38-MariaDB-cll-lve
--- Versión de PHP: 7.2.34
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 28-05-2024 a las 23:21:15
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `dbpphits_lisandro`
+-- Base de datos: `proyectodaw`
 --
 
 -- --------------------------------------------------------
@@ -81,6 +80,13 @@ CREATE TABLE `incidencias` (
   `fecha_y_hora` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB;
 
+--
+-- Volcado de datos para la tabla `incidencias`
+--
+
+INSERT INTO `incidencias` (`id`, `tipo`, `titulo`, `descripcion`, `estado`, `usuario_id`, `inmueble_id`, `fecha_y_hora`) VALUES
+(1, 'fontaneria', 'Tuberia principal pierde agua', 'La tuberia principal de la cocina para el agua fria esta perdiendo agua constantemente', 'nuevo', 1, 1, '2024-05-28 21:19:41');
+
 -- --------------------------------------------------------
 
 --
@@ -93,6 +99,14 @@ CREATE TABLE `inmuebles` (
   `propietario_usuario_id` int(11) NOT NULL,
   `inquilino_usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB;
+
+--
+-- Volcado de datos para la tabla `inmuebles`
+--
+
+INSERT INTO `inmuebles` (`id`, `direccion`, `propietario_usuario_id`, `inquilino_usuario_id`) VALUES
+(1, 'Gran Via, 54', 1, 3),
+(2, 'Calle de Valencia, 25', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -121,6 +135,16 @@ CREATE TABLE `usuarios` (
   `telefono` tinytext NOT NULL,
   `administrador` tinyint(1) NOT NULL
 ) ENGINE=InnoDB;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `email`, `contrasena`, `telefono`, `administrador`) VALUES
+(1, 'Lisandro', 'Knott', 'lisandrok@gmail.com', 'secreto', '635-555-5555', 1),
+(2, 'Juan', 'Perez', 'juan.perez@gmail.com', 'secreto2', '635-666-5555', 0),
+(3, 'Federico', 'Inquilino', 'inquilino.de.ejemplo@gmail.com', 'secreto3', '999-856-221', 0),
+(4, 'Gonzalo', 'Inquilino', 'inquilino.de.ejemplo.2@gmail.com', 'secreto4', '999-555-999', 0);
 
 --
 -- Índices para tablas volcadas
@@ -194,13 +218,13 @@ ALTER TABLE `impresiones`
 -- AUTO_INCREMENT de la tabla `incidencias`
 --
 ALTER TABLE `incidencias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `inmuebles`
 --
 ALTER TABLE `inmuebles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `subscripcion`
@@ -212,7 +236,7 @@ ALTER TABLE `subscripcion`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
