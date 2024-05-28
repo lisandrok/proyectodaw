@@ -59,4 +59,14 @@ class Usuario {
         $this->inmuebles[] = $inmueble;
     }
 
+    public static function validarUsuario($email, $contrasena) {
+        $consulta = Conexion::consulta("SELECT contrasena FROM usuarios WHERE email='" . $email . "'");
+
+        foreach ($consulta as $fila) {
+            if ($fila["contrasena"] == $contrasena) {
+                return true;
+            }
+        } 
+        return false;
+    }
 }
