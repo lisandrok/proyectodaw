@@ -47,14 +47,23 @@
             bottom: 0;
             width: 100%;
         }
+        .carousel-item img {
+            max-height: 500px;
+            object-fit: cover;
+        }
+        .carousel-caption {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+        }
     </style>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
 <div class="header">
     <div class="logo">
         <a href="index.php">
-            <img src="logo.png" alt="Alquiler+">
+            <img src="img/logo.png" alt="Alquiler+">
         </a>
     </div>
     <div class="precios">
@@ -68,7 +77,6 @@
         echo '<div class="boton login">';
         echo '<a href="login.php">Iniciar sesi&oacuten</a>';
     }
-
     ?>
     </div>
 </div>

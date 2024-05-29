@@ -23,4 +23,29 @@ class Convenio {
     public function getDescripcion () {
         return $this->descripcion;
     }
+
+    public static function obtenerConvenioExistente($id){
+        $consulta = Conexion::consulta("SELECT id, tipo, descripcion FROM convenios WHERE id=" . $id);
+
+        foreach ($consulta as $fila) {
+            $convenio = new Convenio($fila['id'], $fila['tipo'], $fila['descripcion']);
+        }
+
+        return $convenio;
+    }
+
+    public static function obtenerConvenioPorTipo($tipo){
+        //TODO: Permitir que haya mas de un convenio por tipo y devolver uno que sea random
+        $consulta = Conexion::consulta("SELECT id, tipo, descripcion FROM convenios WHERE tipo='" . $tipo . "'");
+
+        foreach ($consulta as $fila) {
+            $convenio = new Convenio($fila['id'], $fila['tipo'], $fila['descripcion']);
+        }
+
+        return $convenio;
+    }
+
+    public function imprimir($usuario) {
+        $consulta = Conexion::consulta("INSERT INTO impresiones (usuario_id, convenio_id) VALUES (" . $usuario->getId() . ", " . $this->getId() . ")");
+    }
 }
