@@ -35,22 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php require 'header.php'; ?>
 
-        <div>
-            <form action="login.php" method="post">
-                    <div>
-                        <label for="email">Email:</label>
-                        <input type="text" id="email" name="email" required>
-                    </div>
-                    <div>
-                        <label for="contrasena">Contraseña:</label>
-                        <input type="password" id="contrasena" name="contrasena" required>
-                    </div>
-                    <div>
-                        <button type="submit">Entrar</button>
-                    </div>
-            </form>
-            <a href="nuevacuenta.php">Crear una nueva cuenta</a>
-        </div>
+<h1>En construcci&oacute;n</h1>
+<img src="img/construccion.jpg" alt="Imagen de un edificio en construcci&oacute;n con un port&aacute;til en primer plano" id="construccion">
 
 <?php require 'footer.php' ?>
 
