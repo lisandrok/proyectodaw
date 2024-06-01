@@ -46,6 +46,6 @@ class Convenio {
     }
 
     public function imprimir($usuario) {
-        $consulta = Conexion::consulta("INSERT INTO impresiones (usuario_id, convenio_id) VALUES (" . $usuario->getId() . ", " . $this->getId() . ")");
+        Conexion::consulta("INSERT INTO impresiones (usuario_id, convenio_id) VALUES (" . $usuario->getId() . ", " . $this->getId() . ")");
     }
 }

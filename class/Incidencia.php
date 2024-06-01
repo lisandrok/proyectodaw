@@ -52,5 +52,16 @@ class Incidencia {
 
     }
 
+    public static function obtenerTiposBaseDeDatos() {
+        $consulta = Conexion::consulta("SHOW COLUMNS FROM incidencias LIKE 'tipo'");
+
+        $tipos = [];
+        foreach($consulta as $fila) {
+            if (preg_match("/^enum\((.*)\)$/", $fila['Type'], $matches)) {
+                $tipos = str_getcsv($matches[1], ',', "'");
+            }
+        }
+        return $tipos;
+    }
 
 }
