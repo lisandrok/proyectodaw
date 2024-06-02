@@ -25,7 +25,7 @@ $usuario = Usuario::obtenerUsuarioExistente($_SESSION['usuarioId']);
 
         <?php require '../include/nav.php'; ?>
         <div class="contenido container mt-5 flex-grow-1">
-            <h1>Inmuebles de <?php echo"{$usuario->getNombre()} {$usuario->getApellido()} "?></h1>
+            <h1>Inmuebles de <?php echo"{$usuario->getNombre()} {$usuario->getApellido()}"?></h1>
             <!-- TODO: Agregar logica para cuando el usuario no tiene ninguna propiedad -->
             <table class="table table-striped">
                 <thead>
@@ -46,7 +46,7 @@ $usuario = Usuario::obtenerUsuarioExistente($_SESSION['usuarioId']);
                             <tr>
                                 <td><?php echo $inmueble->getId(); ?></td>
                                 <td><?php echo $inmueble->getDireccion(); ?></td>
-                                <td><?php echo $inmueble->getInquilino()->getNombre(); ?></td>
+                                <td><?php echo "{$inmueble->getInquilino()->getNombre()} {$inmueble->getInquilino()->getApellido()}" ; ?></td>
                                 <td><?php echo count($inmueble->getIncidencias()); ?></td>
                                 <td><a href="nuevaincidencia.php?inmuebleId=<?php echo $inmueble->getId(); ?>" class="edit-button btn btn-primary"><i class="bi bi-tools"></i></a></td>
                                 <td><a href="editarinmueble.php?id=<?php echo $inmueble->getId(); ?>" class="edit-button btn btn-secondary"><i class="bi bi-pencil"></i></a></td>

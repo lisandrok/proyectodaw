@@ -41,29 +41,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php require '../include/nav.php'; ?>
 
         <div class="contenido container mt-5">
-        <h2>Crear nueva incidencia</h2>
-        <form action="nuevaincidencia.php" method="POST">
-            <div class="form-group">
-                <label for="tipo">Tipo</label>
-                <select name="tipo" id="tipo" class="form-control" required>
-                    <option>Seleccione un tipo</option>
-                    <?php foreach (Incidencia::obtenerTiposBaseDeDatos() as $tipo): ?>
-                        <option value="<?php echo htmlspecialchars($tipo); ?>"><?php echo htmlspecialchars($tipo); ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <div id="convenio" class="mt-3"></div>
-            <div class="form-group">
-                <label for="titulo">T&iacute;tulo</label>
-                <input type="text" name="titulo" id="titulo" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="descripcion">Descripci&oacute;n</label>
-                <textarea name="descripcion" id="descripcion" class="form-control" rows="4" required></textarea>
-            </div>
-            <input type="hidden" name="inmuebleId" id="inmuebleId" value="<?php echo $inmuebleId?>">
-            <button type="submit" class="btn btn-primary">Crear</button>
-        </form>
+            <h2>Crear nueva incidencia</h2>
+            <form action="nuevaincidencia.php" method="POST">
+                <div class="form-group">
+                    <label for="tipo">Tipo</label>
+                    <select name="tipo" id="tipo" class="form-control" required>
+                        <option>Seleccione un tipo</option>
+                        <?php foreach (Incidencia::obtenerTiposBaseDeDatos() as $tipo): ?>
+                            <option value="<?php echo htmlspecialchars($tipo); ?>"><?php echo htmlspecialchars($tipo); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div id="convenio" class="mt-3"></div>
+                <div class="form-group">
+                    <label for="titulo">T&iacute;tulo</label>
+                    <input type="text" name="titulo" id="titulo" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripci&oacute;n</label>
+                    <textarea name="descripcion" id="descripcion" class="form-control" rows="4" required></textarea>
+                </div>
+                <input type="hidden" name="inmuebleId" id="inmuebleId" value="<?php echo $inmuebleId?>">
+                <button type="submit" class="btn btn-primary">Crear</button>
+            </form>
     </div>
 
 <?php require '../include/footer.php' ?>

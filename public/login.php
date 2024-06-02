@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                         </form>
                         <div class="text-center">
-                            <a href="nuevacuenta.php">Crear una nueva cuenta</a>
+                            <a href="nueva_cuenta.php">Crear una nueva cuenta</a>
                         </div>
                     </div>
                 </div>

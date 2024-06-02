@@ -6,16 +6,24 @@ class Usuario {
     private $nombre;
     private $apellido;
     private $email;
+    private $contrasena;
     private $telefono;
+    private $isAdministrador;
     private $inmuebles = array(); //Aqui se guardan los inmuebles del usuario
 
-    public function __construct($id, $nombre, $apellido, $email, $telefono, $inmuebles) {
-        $this->id = $id;
-        $this->nombre = $nombre;
-        $this->apellido = $apellido;
-        $this->email = $email;
-        $this->telefono = $telefono;
-        $this->inmuebles = $inmuebles;
+    public function __construct($nombre, $apellido, $email, $contrasena, $telefono, $isAdministrador=0, $inmuebles=null, $id=null) { //Simulo un constructor con sobrecarga
+        if ($id != null) {
+            $this->id = $id;
+            $this->nombre = $nombre;
+            $this->apellido = $apellido;
+            $this->email = $email;
+            $this->contrasena = $contrasena;
+            $this->telefono = $telefono;
+            $this->isAdministrador = $isAdministrador;
+            $this->inmuebles = $inmuebles;
+        } else if ($id === null) { //TODO: Controlar si el usuario pudo crearse
+            Conexion::consulta("INSERT INTO usuarios (nombre, apellido, email, contrasena, telefono, administrador) VALUES ('".$nombre."', '".$apellido."', '".$email."', '".$contrasena."', '".$telefono."', 0)");
+        }
     }
 
     public function getId() {
@@ -67,10 +75,10 @@ class Usuario {
         }
 
         //Obtengo los datos del usuario desde la db
-        $consulta = Conexion::consulta("SELECT id, nombre, apellido, email, telefono FROM usuarios WHERE id=" . $id);
+        $consulta = Conexion::consulta("SELECT id, nombre, apellido, email, contrasena, telefono, administrador FROM usuarios WHERE id=" . $id);
 
         foreach ($consulta as $fila) {
-            $usuario = new Usuario($fila['id'], $fila['nombre'], $fila['apellido'], $fila['email'], $fila['telefono'], $inmuebles);
+            $usuario = new Usuario($fila['nombre'], $fila['apellido'], $fila['email'], $fila['contrasena'], $fila['telefono'], $fila['administrador'], $inmuebles, $fila['id']);
         }
         return $usuario;
     }
