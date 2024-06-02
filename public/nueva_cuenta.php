@@ -19,7 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $contrasena = $_POST['contrasena'];
     $telefono = $_POST['telefono'];
 
-    $usuario = new Usuario($nombre, $apellido, $email, $contrasena, $telefono);
+    $constrasenaHash = password_hash($contrasena, PASSWORD_DEFAULT);
+
+    $usuario = new Usuario($nombre, $apellido, $email, $constrasenaHash, $telefono);
 
     header('Location: login.php'); //redirecciona al login para que el usuario pueda loguearse a su nueva cuenta
     exit();

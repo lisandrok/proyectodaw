@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-05-2024 a las 23:49:02
+-- Tiempo de generación: 03-06-2024 a las 01:42:38
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.1.25
 
@@ -48,9 +48,16 @@ CREATE TABLE `alquiler` (
 DROP TABLE IF EXISTS `convenios`;
 CREATE TABLE `convenios` (
   `id` int(11) NOT NULL,
-  `tipo` enum('fontaneria','electricidad') NOT NULL,
+  `tipo` enum('fontaneria','electricidad','telefonillo','mobiliario','pagos','carpinteria','cerrajeria','pintura') NOT NULL,
   `descripcion` text NOT NULL
 ) ENGINE=InnoDB;
+
+--
+-- Volcado de datos para la tabla `convenios`
+--
+
+INSERT INTO `convenios` (`id`, `tipo`, `descripcion`) VALUES
+(1, 'electricidad', 'Contacta con Juan Perez, el <strong>mejor electricista</strong> de la comunidad.');
 
 -- --------------------------------------------------------
 
@@ -66,6 +73,14 @@ CREATE TABLE `impresiones` (
   `fecha_y_hora` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB;
 
+--
+-- Volcado de datos para la tabla `impresiones`
+--
+
+INSERT INTO `impresiones` (`id`, `usuario_id`, `convenio_id`, `fecha_y_hora`) VALUES
+(1, 1, 1, '2024-06-02 20:46:42'),
+(2, 1, 1, '2024-06-02 20:47:26');
+
 -- --------------------------------------------------------
 
 --
@@ -75,10 +90,10 @@ CREATE TABLE `impresiones` (
 DROP TABLE IF EXISTS `incidencias`;
 CREATE TABLE `incidencias` (
   `id` int(11) NOT NULL,
-  `tipo` enum('fontaneria','electricidad') NOT NULL,
+  `tipo` enum('fontaneria','electricidad','telefonillo','mobiliario','pagos','carpinteria','cerrajeria','pintura') NOT NULL,
   `titulo` text NOT NULL,
   `descripcion` text NOT NULL,
-  `estado` enum('nuevo','iniciado','completado','cancelado') NOT NULL,
+  `estado` enum('nuevo','iniciado','completado','cancelado') NOT NULL DEFAULT 'nuevo',
   `usuario_id` int(11) NOT NULL,
   `inmueble_id` int(11) NOT NULL,
   `fecha_y_hora` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -89,7 +104,12 @@ CREATE TABLE `incidencias` (
 --
 
 INSERT INTO `incidencias` (`id`, `tipo`, `titulo`, `descripcion`, `estado`, `usuario_id`, `inmueble_id`, `fecha_y_hora`) VALUES
-(1, 'fontaneria', 'Tuberia principal pierde agua', 'La tuberia principal de la cocina para el agua fria esta perdiendo agua constantemente', 'nuevo', 1, 1, '2024-05-28 21:19:41');
+(1, 'fontaneria', 'Tuberia principal pierde agua', 'La tuberia principal de la cocina para el agua fria esta perdiendo agua constantemente', 'nuevo', 1, 1, '2024-05-28 21:19:41'),
+(2, 'mobiliario', 'Mueble de la tv roto', 'Se ha roto el mueble de la TV', 'nuevo', 1, 1, '2024-06-02 14:22:58'),
+(3, 'pintura', 'Pared despintada', 'Se ha descascarado la pintura de la pared', 'nuevo', 1, 2, '2024-06-02 14:32:56'),
+(4, 'cerrajeria', 'Cerradura no funciona', 'La cerradura no cierra correctamente', 'nuevo', 1, 2, '2024-06-02 14:41:33'),
+(5, 'pagos', 'no se registro el pago del alquiler del mes de abril', 'no se registro el pago del alquiler del mes de abril a pesar de que realice la transferencia el primer dia del mes', 'nuevo', 1, 1, '2024-06-02 15:54:13'),
+(6, 'electricidad', 'problema con el tablero de luz', 'Salen chispas al consumir mucha potencia, por ejemplo, al cocinar.', 'nuevo', 1, 1, '2024-06-02 20:52:27');
 
 -- --------------------------------------------------------
 
@@ -138,7 +158,7 @@ CREATE TABLE `usuarios` (
   `nombre` tinytext NOT NULL,
   `apellido` tinytext NOT NULL,
   `email` mediumtext NOT NULL,
-  `contrasena` text NOT NULL,
+  `contrasena_hash` text NOT NULL,
   `telefono` tinytext NOT NULL,
   `administrador` tinyint(1) NOT NULL
 ) ENGINE=InnoDB;
@@ -147,11 +167,16 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `email`, `contrasena`, `telefono`, `administrador`) VALUES
-(1, 'Lisandro', 'Knott', 'lisandrok@gmail.com', 'secreto', '635-555-5555', 1),
-(2, 'Juan', 'Perez', 'juan.perez@gmail.com', 'secreto2', '635-666-5555', 0),
-(3, 'Federico', 'Inquilino', 'inquilino.de.ejemplo@gmail.com', 'secreto3', '999-856-221', 0),
-(4, 'Gonzalo', 'Inquilino', 'inquilino.de.ejemplo.2@gmail.com', 'secreto4', '999-555-999', 0);
+INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `email`, `contrasena_hash`, `telefono`, `administrador`) VALUES
+(1, 'Lisandro', 'Knott', 'lisandrok@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '635-555-5555', 1),
+(2, 'Juan', 'Perez', 'juan.perez@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '635-666-5555', 0),
+(3, 'Federico', 'Garcia', 'inquilino.de.ejemplo@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '999-856-221', 0),
+(4, 'Gonzalo', 'Herrera', 'inquilino.de.ejemplo.2@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '999-555-999', 0),
+(5, 'Maria Eugenia', 'Rodriguez Garcia', 'mariarodriguez@hotmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '555-888-999', 0),
+(6, 'Guillermo Pedro', 'Olavego Gimenez', 'guillermoolavego@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '771-586-542', 0),
+(7, 'Gloria Estela', 'Sanchez Grondona', 'gloriasanchez@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '698-232-741', 0),
+(8, 'Susana Analia', 'Gimenez Morales', 'susanagimenez@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '998-212-777', 0),
+(9, 'Ignacio Roberto', 'Torres Herrera', 'ignaciotorres@gmail.com', '$2y$10$5xUGy6jGhF2xNzJRYqlhxuRHyUqqGxXR2yLV92XNaORPJ91nyRC/i', '667-895-031', 0);
 
 --
 -- Índices para tablas volcadas
@@ -213,19 +238,19 @@ ALTER TABLE `alquiler`
 -- AUTO_INCREMENT de la tabla `convenios`
 --
 ALTER TABLE `convenios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `impresiones`
 --
 ALTER TABLE `impresiones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `incidencias`
 --
 ALTER TABLE `incidencias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `inmuebles`
@@ -243,7 +268,7 @@ ALTER TABLE `subscripcion`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
