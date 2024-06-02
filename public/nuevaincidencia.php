@@ -46,11 +46,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="form-group">
                 <label for="tipo">Tipo</label>
                 <select name="tipo" id="tipo" class="form-control" required>
+                    <option>Seleccione un tipo</option>
                     <?php foreach (Incidencia::obtenerTiposBaseDeDatos() as $tipo): ?>
                         <option value="<?php echo htmlspecialchars($tipo); ?>"><?php echo htmlspecialchars($tipo); ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
+            <div id="convenio" class="mt-3"></div>
             <div class="form-group">
                 <label for="titulo">T&iacute;tulo</label>
                 <input type="text" name="titulo" id="titulo" class="form-control" required>
@@ -67,5 +69,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php require '../include/footer.php' ?>
 <?php require '../include/jsfinalhtml.php' ?>
 
+        <script> //Este script permite recuperar el convenio via AJAX
+        document.addEventListener('DOMContentLoaded', function() {
+
+            document.getElementById('tipo').addEventListener('change', function() { //Detectamos cambios en el dropdown
+
+                let seleccionado = this.value;
+                let requestParaObtenerConvenio = new XMLHttpRequest();
+
+                requestParaObtenerConvenio.open('POST', 'obtener_convenio.php', true);
+                requestParaObtenerConvenio.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                requestParaObtenerConvenio.onreadystatechange = function() {
+                    if (requestParaObtenerConvenio.readyState === XMLHttpRequest.DONE) {
+                        if (requestParaObtenerConvenio.status === 200) { //Solamente imprimiremos convenio si el request devuelve 200
+                            document.getElementById('convenio').innerHTML = requestParaObtenerConvenio.responseText; //Imprimimos el convenio en el div correspondiente
+                        }
+                    }
+                };
+
+                requestParaObtenerConvenio.send('tipo_convenio=' + seleccionado);
+
+            });
+        });
+        </script>
     </body>
 </html>

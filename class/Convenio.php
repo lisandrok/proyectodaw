@@ -38,6 +38,8 @@ class Convenio {
         //TODO: Permitir que haya mas de un convenio por tipo y devolver uno que sea random
         $consulta = Conexion::consulta("SELECT id, tipo, descripcion FROM convenios WHERE tipo='" . $tipo . "'");
 
+        $convenio = null; //Declaro la variable para evitar warnings
+
         foreach ($consulta as $fila) {
             $convenio = new Convenio($fila['id'], $fila['tipo'], $fila['descripcion']);
         }
