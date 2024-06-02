@@ -32,18 +32,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Alquiler +</title>
-        <link href="css/estilos.css" rel="stylesheet">
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> <!-- Iconos de Bootstrap -->
+
+<?php require '../include/head.php' ?>
+
     </head>
     <body>
 
-        <?php require '../include/header.php'; ?>
+        <?php require '../include/nav.php'; ?>
 
-        <div class="container mt-5">
+        <div class="contenido container mt-5">
         <h2>Crear nueva incidencia</h2>
         <form action="nuevaincidencia.php" method="POST">
             <div class="form-group">
@@ -67,8 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     </div>
 
-
 <?php require '../include/footer.php' ?>
+<?php require '../include/jsfinalhtml.php' ?>
 
     </body>
 </html>

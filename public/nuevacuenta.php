@@ -25,17 +25,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Alquiler +</title>
-        <link href="css/estilos.css" rel="stylesheet">
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<?php require '../include/head.php' ?>
+
     </head>
     <body>
 
-<?php require '../include/header.php'; ?>
+<?php require '../include/nav.php'; ?>
 
-        <div class="container mt-5">
+        <div class="contenido container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-8 text-center">
                     <h1>En construcci&oacute;n</h1>
@@ -45,10 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
 <?php require '../include/footer.php' ?>
-
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<?php require '../include/jsfinalhtml.php' ?>
 
     </body>
 </html>

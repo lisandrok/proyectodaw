@@ -1,43 +1,25 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+/* .container {
+    flex: 1;
+} */
 .header {
     padding: 10px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.logo {
-    margin-left: 20px;
-}
-.logo img {
-    height: 50px;
-}
-.precios {
-    text-align: center;
-}
-.login {
-    background-color: #4CAF50;
-}
-.logout {
-    background-color: red;
-}
-.boton {
-    margin-right: 20px;
-    padding: 10px 20px;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-}
 .footer {
-    background-color: #f2f2f2;
-    padding: 10px 0;
-    text-align: center;
     position: fixed;
+    left: 0;
     bottom: 0;
     width: 100%;
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 5px 0;
 }
 .carousel-item img {
     max-height: 500px;
