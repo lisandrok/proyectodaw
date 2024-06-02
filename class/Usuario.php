@@ -60,7 +60,7 @@ class Usuario {
     public static function obtenerUsuarioExistente($id) {
         //Primero obtengo los inmuebles del usuario ya que debo utilizarlos para crear el usuario
         $consulta = Conexion::consulta("SELECT id, direccion, inquilino_usuario_id FROM inmuebles WHERE propietario_usuario_id=" . $id);
-
+        $inmuebles = [];
         foreach ($consulta as $fila) {
             $inmueble = Inmueble::obtenerInmuebleExistente($fila["id"]);
             $inmuebles[] = $inmueble;

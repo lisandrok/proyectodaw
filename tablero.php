@@ -10,7 +10,7 @@ spl_autoload_register(function ($class) {
     require "class/" . $class . ".php";
 });
 
-$usuario = unserialize($_SESSION['usuario']);
+$usuario = Usuario::obtenerUsuarioExistente($_SESSION['usuarioId']);
 
 ?>
 

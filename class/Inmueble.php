@@ -30,11 +30,9 @@ class Inmueble {
         return $this->incidencias?? []; //Si incidencias es null, devuelvo un array vacio
     }
 
-    public function agregarIncidencia($incidencia, $usuario) {
-        //Primero inserto la incidencia en la base de datos, omito el id ya que es un autoincrement y la fecha_y_hora que se autocompleta con el horario actual
-        Conexion::consulta("INSERT INTO incidencias (tipo, titulo, descripcion, estado, usuario_id, inmueble_id) VALUES (" . $incidencia->getTipo() . ", " . $incidencia->getTitulo() . ", " . $incidencia->getDescripcion() . ", " . $incidencia->getEstado() . ", " . $usuario->getId() . ", " . $this->getId() . ")");
-        //Segundo inserto la incidencia en el array de incidencias
-        $incidencias[] = $incidencia;
+    public function agregarIncidencia($tipo, $titulo, $descripcion, $usuario) {
+        //Inserto la incidencia en la base de datos, omito el id ya que es un autoincrement y el estado y la fecha_y_hora que tienen defaults
+        Conexion::consulta("INSERT INTO incidencias (tipo, titulo, descripcion, usuario_id, inmueble_id) VALUES ('" . $tipo . "', '" . $titulo . "', '" . $descripcion . "', " . $usuario->getId() . ", " . $this->getId() . ")");
     }
 
     public static function obtenerInmuebleExistente($id) {
