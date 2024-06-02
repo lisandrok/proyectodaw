@@ -33,6 +33,7 @@ class Conexion {
         return self::$conexion;
     }
 
+    //TODO: Modificar este metodo para evitar inyecciones SQL
     public static function consulta($sql) {
         self::inicializar();
         try {

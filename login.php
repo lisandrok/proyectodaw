@@ -35,22 +35,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php require 'header.php'; ?>
 
-        <div>
-            <form action="login.php" method="post">
-                    <div>
-                        <label for="email">Email:</label>
-                        <input type="text" id="email" name="email" required>
+<div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h2>Ingresar</h2>
                     </div>
-                    <div>
-                        <label for="contrasena">Contraseña:</label>
-                        <input type="password" id="contrasena" name="contrasena" required>
+                    <div class="card-body">
+                        <form action="login.php" method="post">
+                            <div class="form-group">
+                                <label for="email">Correo electr&oacute;nico:</label>
+                                <input type="email" id="email" name="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contrasena">Contrase&ntilde;a:</label>
+                                <input type="password" id="contrasena" name="contrasena" class="form-control" required>
+                            </div>
+                            <div class="form-group text-center">
+                                <button type="submit" class="btn btn-primary">Entrar</button>
+                            </div>
+                        </form>
+                        <div class="text-center">
+                            <a href="nuevacuenta.php">Crear una nueva cuenta</a>
+                        </div>
                     </div>
-                    <div>
-                        <button type="submit">Entrar</button>
-                    </div>
-            </form>
-            <a href="nuevacuenta.php">Crear una nueva cuenta</a>
+                </div>
+            </div>
         </div>
+    </div>
 
 <?php require 'footer.php' ?>
 
