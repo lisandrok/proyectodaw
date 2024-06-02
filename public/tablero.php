@@ -7,7 +7,7 @@ if (!isset($_SESSION['email'])) {
 }
 
 spl_autoload_register(function ($class) {
-    require "class/" . $class . ".php";
+    require "../class/" . $class . ".php";
 });
 
 $usuario = Usuario::obtenerUsuarioExistente($_SESSION['usuarioId']);
@@ -26,7 +26,7 @@ $usuario = Usuario::obtenerUsuarioExistente($_SESSION['usuarioId']);
     </head>
     <body>
 
-        <?php require 'header.php'; ?>
+        <?php require '../header.php'; ?>
 
         <h1>Inmuebles de <?php echo"{$usuario->getNombre()} {$usuario->getApellido()} "?></h1>
         <!-- TODO: Agregar logica para cuando el usuario no tiene ninguna propiedad -->
@@ -59,7 +59,7 @@ $usuario = Usuario::obtenerUsuarioExistente($_SESSION['usuarioId']);
             </tbody>
         </table>
 
-<?php require 'footer.php' ?>
+<?php require '../footer.php' ?>
 
     </body>
 </html>

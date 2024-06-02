@@ -2,7 +2,7 @@
 session_start();
 
 spl_autoload_register(function ($class) {
-    require "class/" . $class . ".php";
+    require "../class/" . $class . ".php";
 });
 
 ?>
@@ -13,12 +13,12 @@ spl_autoload_register(function ($class) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Alquiler +</title>
-        <link href="css/estilos.css" rel="stylesheet">
+        <link href="../css/estilos.css" rel="stylesheet">
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
 
-<?php require 'header.php'; ?>
+<?php require '../header.php'; ?>
 
 
         <div class="container mt-5">
@@ -60,7 +60,7 @@ spl_autoload_register(function ($class) {
         </div>
         <br><br><br><br><br>
 
-<?php require 'footer.php' ?>
+<?php require '../footer.php' ?>
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

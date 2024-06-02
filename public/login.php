@@ -2,7 +2,7 @@
 session_start();
 
 spl_autoload_register(function ($class) {
-    require "class/" . $class . ".php";
+    require "../class/" . $class . ".php";
 });
 
 //TODO: usar una contrasena encriptada
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </head>
     <body>
 
-<?php require 'header.php'; ?>
+<?php require '../header.php'; ?>
 
 <div class="container mt-5">
         <div class="row justify-content-center">
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 
-<?php require 'footer.php' ?>
+<?php require '../footer.php' ?>
 
     </body>
 </html>

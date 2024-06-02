@@ -4,9 +4,6 @@
                     <img src="img/logo.png" alt="Alquiler+">
                 </a>
             </div>
-            <div class="precios">
-                <a href="precios.php">Precios</a>
-            </div>
 
             <?php if (isset($_SESSION['email'])) {
                 echo '<div class="boton logout">';

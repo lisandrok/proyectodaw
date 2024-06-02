@@ -7,7 +7,7 @@ if (!isset($_SESSION['email'])) {
 }
 
 spl_autoload_register(function ($class) {
-    require "class/" . $class . ".php";
+    require "../class/" . $class . ".php";
 });
 
 $usuario = Usuario::obtenerUsuarioExistente($_SESSION['usuarioId']);
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </head>
     <body>
 
-        <?php require 'header.php'; ?>
+        <?php require '../header.php'; ?>
 
         <div class="container mt-5">
         <h2>Crear nueva incidencia</h2>
@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
 
-<?php require 'footer.php' ?>
+<?php require '../footer.php' ?>
 
     </body>
 </html>

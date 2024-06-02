@@ -1,6 +1,6 @@
 <?php
 
-require_once "configuracion.php"; //Incluyo el archivo de configuracion con las credenciales de la bbdd
+require_once "../configuracion.php"; //Incluyo el archivo de configuracion con las credenciales de la bbdd
 
 class Conexion {
     private static $host;
