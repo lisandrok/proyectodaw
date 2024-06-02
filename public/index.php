@@ -5,6 +5,11 @@ spl_autoload_register(function ($class) {
     require "../class/" . $class . ".php";
 });
 
+//Redirecciono al tablero si el usuario ya se encuentra logueado
+if (isset($_SESSION['email'])) {
+    header('Location: tablero.php');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
