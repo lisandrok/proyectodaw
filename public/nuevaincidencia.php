@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </head>
     <body>
 
-        <?php require '../header.php'; ?>
+        <?php require '../include/header.php'; ?>
 
         <div class="container mt-5">
         <h2>Crear nueva incidencia</h2>
@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
 
-<?php require '../footer.php' ?>
+<?php require '../include/footer.php' ?>
 
     </body>
 </html>

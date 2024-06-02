@@ -26,7 +26,7 @@ $usuario = Usuario::obtenerUsuarioExistente($_SESSION['usuarioId']);
     </head>
     <body>
 
-        <?php require '../header.php'; ?>
+        <?php require '../include/header.php'; ?>
 
         <h1>Inmuebles de <?php echo"{$usuario->getNombre()} {$usuario->getApellido()} "?></h1>
         <!-- TODO: Agregar logica para cuando el usuario no tiene ninguna propiedad -->
@@ -59,7 +59,7 @@ $usuario = Usuario::obtenerUsuarioExistente($_SESSION['usuarioId']);
             </tbody>
         </table>
 
-<?php require '../footer.php' ?>
+<?php require '../include/footer.php' ?>
 
     </body>
 </html>

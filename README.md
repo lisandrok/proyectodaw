@@ -5,7 +5,7 @@
     - BBDD MySQL o compatible (MariaDB)
 
 ## Archivo de configuraci&oacute;n
-Utilizar el archivo `./configuracion.ejemplo.php` como base para generar un archivo de configuraci&oacute;n llamado `./configuracion.php` con los datos necesarios para conectarse a la base de datos.
+Utilizar el archivo `./include/configuracion.ejemplo.php` como base para generar un archivo de configuraci&oacute;n llamado `./include/configuracion.php` con los datos necesarios para conectarse a la base de datos.
 
 ## Generar BBDD
 Utilizar el archivo `./bbdd.sql` para generar la base de datos.

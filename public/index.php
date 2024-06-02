@@ -18,7 +18,7 @@ spl_autoload_register(function ($class) {
     </head>
     <body>
 
-<?php require '../header.php'; ?>
+<?php require '../include/header.php'; ?>
 
 
         <div class="container mt-5">
@@ -60,7 +60,7 @@ spl_autoload_register(function ($class) {
         </div>
         <br><br><br><br><br>
 
-<?php require '../footer.php' ?>
+<?php require '../include/footer.php' ?>
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
