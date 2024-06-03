@@ -8,10 +8,11 @@ class Usuario {
     private $email;
     private $contrasenaHash;
     private $telefono;
+    private $vencimientoSubscripcion;
     private $esAdministrador;
     private $inmuebles = array(); //Aqui se guardan los inmuebles del usuario
 
-    public function __construct($nombre, $apellido, $email, $contrasenaHash, $telefono, $esAdministrador=0, $inmuebles=null, $id=null) { //Simulo un constructor con sobrecarga
+    public function __construct($nombre, $apellido, $email, $contrasenaHash, $telefono, $vencimientoSubscripcion=null, $esAdministrador=0, $inmuebles=null, $id=null) { //Simulo un constructor con sobrecarga
         if ($id != null) {
             $this->id = $id;
             $this->nombre = $nombre;
@@ -20,9 +21,10 @@ class Usuario {
             $this->contrasenaHash = $contrasenaHash;
             $this->telefono = $telefono;
             $this->esAdministrador = $esAdministrador;
+            $this->vencimientoSubscripcion = new DateTime($vencimientoSubscripcion);
             $this->inmuebles = $inmuebles;
         } else if ($id === null) { //TODO: Controlar si el usuario pudo crearse
-            Conexion::consulta("INSERT INTO usuarios (nombre, apellido, email, contrasena_hash, telefono, es_administrador) VALUES ('".$nombre."', '".$apellido."', '".$email."', '".$contrasenaHash."', '".$telefono."', 0)");
+            Conexion::consulta("INSERT INTO usuarios (nombre, apellido, email, contrasena_hash, telefono, vencimiento_subscripcion, es_administrador) VALUES ('".$nombre."', '".$apellido."', '".$email."', '".$contrasenaHash."', '".$telefono."', DATE_ADD(CURDATE(), INTERVAL 10 DAY), 0)");
         }
     }
 
@@ -44,6 +46,10 @@ class Usuario {
 
     public function getTelefono() {
         return $this->telefono;
+    }
+
+    public function getVencimientoSubscripcion() {
+        return $this->vencimientoSubscripcion;
     }
 
     public function getInmuebles() {
@@ -75,10 +81,10 @@ class Usuario {
         }
 
         //Obtengo los datos del usuario desde la db
-        $consulta = Conexion::consulta("SELECT id, nombre, apellido, email, contrasena_hash, telefono, es_administrador FROM usuarios WHERE id=" . $id);
+        $consulta = Conexion::consulta("SELECT id, nombre, apellido, email, contrasena_hash, telefono, vencimiento_subscripcion, es_administrador FROM usuarios WHERE id=" . $id);
 
         foreach ($consulta as $fila) {
-            $usuario = new Usuario($fila['nombre'], $fila['apellido'], $fila['email'], $fila['contrasena_hash'], $fila['telefono'], $fila['es_administrador'], $inmuebles, $fila['id']);
+            $usuario = new Usuario($fila['nombre'], $fila['apellido'], $fila['email'], $fila['contrasena_hash'], $fila['telefono'], $fila['vencimiento_subscripcion'], $fila['es_administrador'], $inmuebles, $fila['id']);
         }
         return $usuario;
     }

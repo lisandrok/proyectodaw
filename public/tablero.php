@@ -11,6 +11,9 @@ spl_autoload_register(function ($class) {
 });
 
 $usuario = Usuario::obtenerUsuarioExistente($_SESSION['usuarioId']);
+$currentDate = new DateTime();
+$currentDate->setTime(0, 0, 0); //Quito la parte de la hora para poder comparar solo fechas
+$subscripto = ($usuario->getVencimientoSubscripcion() >= $currentDate);
 
 ?>
 
@@ -55,6 +58,22 @@ $usuario = Usuario::obtenerUsuarioExistente($_SESSION['usuarioId']);
                         <?php } ?>
                 </tbody>
             </table>
+            <div class="row">
+                <div class="col-md-4 ml-auto">
+                    <div class="card text-white <?php echo ($subscripto) ? "bg-success" : "bg-secondary" ?> mb-4">
+                        <div class="card-header">Subscripci&oacute;n</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Subscripci&oacute;n <?php echo ($subscripto) ? "Plus" : "Gratuita" ?></h5>
+                            <p class="card-text">
+                                <?php echo ($subscripto) ? "Usted es un usuario plus. Podr&aacute; utilizar todas las funciones de la plataforma hasta el " : "Usted es un usuario gratuito. Solo tiene acceso a las funcionalidades b&aacute;sicas. Su subcripci&oacute;n plus finaliz&oacute; el " ?>
+                                <?php echo ($usuario->getVencimientoSubscripcion())->format("d/m/Y") ?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
 
 <?php require '../include/footer.php' ?>

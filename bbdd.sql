@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2024 a las 22:58:08
+-- Tiempo de generación: 04-06-2024 a las 01:40:30
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.1.25
 
@@ -188,19 +188,6 @@ INSERT INTO `publicidades` (`id`, `tipo`, `contenido`, `link`, `coste_por_impres
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `subscripcion`
---
-
-DROP TABLE IF EXISTS `subscripcion`;
-CREATE TABLE `subscripcion` (
-  `id` int(11) NOT NULL,
-  `usuario_id` int(11) NOT NULL,
-  `fecha_expiracion` date NOT NULL
-) ENGINE=InnoDB;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `usuarios`
 --
 
@@ -212,6 +199,7 @@ CREATE TABLE `usuarios` (
   `email` mediumtext NOT NULL,
   `contrasena_hash` text NOT NULL,
   `telefono` tinytext NOT NULL,
+  `vencimiento_subscripcion` date NOT NULL DEFAULT current_timestamp(),
   `es_administrador` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB;
 
@@ -219,16 +207,16 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `email`, `contrasena_hash`, `telefono`, `es_administrador`) VALUES
-(1, 'Lisandro', 'Knott', 'lisandrok@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '635-555-5555', 1),
-(2, 'Juan', 'Perez', 'juan.perez@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '635-666-5555', 0),
-(3, 'Federico', 'Garcia', 'inquilino.de.ejemplo@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '999-856-221', 0),
-(4, 'Gonzalo', 'Herrera', 'inquilino.de.ejemplo.2@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '999-555-999', 0),
-(5, 'Maria Eugenia', 'Rodriguez Garcia', 'mariarodriguez@hotmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '555-888-999', 0),
-(6, 'Guillermo Pedro', 'Olavego Gimenez', 'guillermoolavego@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '771-586-542', 0),
-(7, 'Gloria Estela', 'Sanchez Grondona', 'gloriasanchez@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '698-232-741', 0),
-(8, 'Susana Analia', 'Gimenez Morales', 'susanagimenez@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '998-212-777', 0),
-(9, 'Ignacio Roberto', 'Torres Herrera', 'ignaciotorres@gmail.com', '$2y$10$5xUGy6jGhF2xNzJRYqlhxuRHyUqqGxXR2yLV92XNaORPJ91nyRC/i', '667-895-031', 0);
+INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `email`, `contrasena_hash`, `telefono`, `vencimiento_subscripcion`, `es_administrador`) VALUES
+(1, 'Lisandro', 'Knott', 'lisandrok@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '635-555-5555', '2024-06-03', 1),
+(2, 'Juan', 'Perez', 'juan.perez@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '635-666-5555', '2024-06-04', 0),
+(3, 'Federico', 'Garcia', 'inquilino.de.ejemplo@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '999-856-221', '2024-06-04', 0),
+(4, 'Gonzalo', 'Herrera', 'inquilino.de.ejemplo.2@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '999-555-999', '2024-06-04', 0),
+(5, 'Maria Eugenia', 'Rodriguez Garcia', 'mariarodriguez@hotmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '555-888-999', '2024-06-04', 0),
+(6, 'Guillermo Pedro', 'Olavego Gimenez', 'guillermoolavego@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '771-586-542', '2024-06-04', 0),
+(7, 'Gloria Estela', 'Sanchez Grondona', 'gloriasanchez@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '698-232-741', '2024-06-04', 0),
+(8, 'Susana Analia', 'Gimenez Morales', 'susanagimenez@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '998-212-777', '2024-06-04', 0),
+(9, 'Ignacio Roberto', 'Torres Herrera', 'ignaciotorres@gmail.com', '$2y$10$5xUGy6jGhF2xNzJRYqlhxuRHyUqqGxXR2yLV92XNaORPJ91nyRC/i', '667-895-031', '2024-06-04', 0);
 
 --
 -- Índices para tablas volcadas
@@ -271,16 +259,11 @@ ALTER TABLE `publicidades`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `subscripcion`
---
-ALTER TABLE `subscripcion`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`) USING HASH;
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -321,12 +304,6 @@ ALTER TABLE `inmuebles`
 --
 ALTER TABLE `publicidades`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `subscripcion`
---
-ALTER TABLE `subscripcion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
