@@ -8,10 +8,10 @@ class Usuario {
     private $email;
     private $contrasenaHash;
     private $telefono;
-    private $isAdministrador;
+    private $esAdministrador;
     private $inmuebles = array(); //Aqui se guardan los inmuebles del usuario
 
-    public function __construct($nombre, $apellido, $email, $contrasenaHash, $telefono, $isAdministrador=0, $inmuebles=null, $id=null) { //Simulo un constructor con sobrecarga
+    public function __construct($nombre, $apellido, $email, $contrasenaHash, $telefono, $esAdministrador=0, $inmuebles=null, $id=null) { //Simulo un constructor con sobrecarga
         if ($id != null) {
             $this->id = $id;
             $this->nombre = $nombre;
@@ -19,10 +19,10 @@ class Usuario {
             $this->email = $email;
             $this->contrasenaHash = $contrasenaHash;
             $this->telefono = $telefono;
-            $this->isAdministrador = $isAdministrador;
+            $this->esAdministrador = $esAdministrador;
             $this->inmuebles = $inmuebles;
         } else if ($id === null) { //TODO: Controlar si el usuario pudo crearse
-            Conexion::consulta("INSERT INTO usuarios (nombre, apellido, email, contrasena_hash, telefono, administrador) VALUES ('".$nombre."', '".$apellido."', '".$email."', '".$contrasenaHash."', '".$telefono."', 0)");
+            Conexion::consulta("INSERT INTO usuarios (nombre, apellido, email, contrasena_hash, telefono, es_administrador) VALUES ('".$nombre."', '".$apellido."', '".$email."', '".$contrasenaHash."', '".$telefono."', 0)");
         }
     }
 
@@ -75,10 +75,10 @@ class Usuario {
         }
 
         //Obtengo los datos del usuario desde la db
-        $consulta = Conexion::consulta("SELECT id, nombre, apellido, email, contrasena_hash, telefono, administrador FROM usuarios WHERE id=" . $id);
+        $consulta = Conexion::consulta("SELECT id, nombre, apellido, email, contrasena_hash, telefono, es_administrador FROM usuarios WHERE id=" . $id);
 
         foreach ($consulta as $fila) {
-            $usuario = new Usuario($fila['nombre'], $fila['apellido'], $fila['email'], $fila['contrasena_hash'], $fila['telefono'], $fila['administrador'], $inmuebles, $fila['id']);
+            $usuario = new Usuario($fila['nombre'], $fila['apellido'], $fila['email'], $fila['contrasena_hash'], $fila['telefono'], $fila['es_administrador'], $inmuebles, $fila['id']);
         }
         return $usuario;
     }
