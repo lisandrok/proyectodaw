@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <?php endforeach; ?>
                     </select>
                 </div>
-                <div id="convenio" class="mt-3"></div>
+                <div id="publicidad" class="mt-3"></div>
                 <div class="form-group">
                     <label for="titulo">T&iacute;tulo</label>
                     <input type="text" name="titulo" id="titulo" class="form-control" required>
@@ -69,27 +69,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php require '../include/footer.php' ?>
 <?php require '../include/jsfinalhtml.php' ?>
 
-        <script> //Este script permite recuperar el convenio via AJAX
+        <script> //Este script permite recuperar la publicidad via AJAX
         document.addEventListener('DOMContentLoaded', function() {
 
             document.getElementById('tipo').addEventListener('change', function() { //Detectamos cambios en el dropdown
 
                 let seleccionado = this.value;
-                let requestParaObtenerConvenio = new XMLHttpRequest();
+                let requestAjax = new XMLHttpRequest();
 
-                requestParaObtenerConvenio.open('POST', 'obtener_convenio.php', true);
-                requestParaObtenerConvenio.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                requestParaObtenerConvenio.onreadystatechange = function() {
-                    if (requestParaObtenerConvenio.readyState === XMLHttpRequest.DONE) {
-                        if (requestParaObtenerConvenio.status === 200) { //Solamente imprimiremos convenio si el request devuelve 200
-                            document.getElementById('convenio').innerHTML = requestParaObtenerConvenio.responseText; //Imprimimos el convenio en el div correspondiente
+                requestAjax.open('POST', 'obtener_publicidad.php', true);
+                requestAjax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                requestAjax.onreadystatechange = function() {
+                    if (requestAjax.readyState === XMLHttpRequest.DONE) {
+                        if (requestAjax.status === 200) {
+                            var publicidad = JSON.parse(requestAjax.responseText); //Convierto el JSON de PHP a un objeto de Javascript
+                            var link = document.createElement("a");
+                            link.href = "visitar_publicidad.php?publicidadId=" + publicidad.id;
+                            link.target = "_blank";
+                            link.textContent =publicidad.contenido;
+                            document.getElementById('publicidad').appendChild(link); //Agregamos el link con el contenido
                         }
                     }
                 };
-
-                requestParaObtenerConvenio.send('tipo_convenio=' + seleccionado);
+                requestAjax.send('tipo=' + seleccionado);
 
             });
+        
         });
         </script>
     </body>

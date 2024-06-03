@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2024 a las 10:56:06
+-- Tiempo de generación: 03-06-2024 a las 22:58:08
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.1.25
 
@@ -42,22 +42,25 @@ CREATE TABLE `alquiler` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `convenios`
+-- Estructura de tabla para la tabla `clicks`
 --
 
-DROP TABLE IF EXISTS `convenios`;
-CREATE TABLE `convenios` (
+DROP TABLE IF EXISTS `clicks`;
+CREATE TABLE `clicks` (
   `id` int(11) NOT NULL,
-  `tipo` enum('fontaneria','electricidad','telefonillo','mobiliario','pagos','carpinteria','cerrajeria','pintura') NOT NULL,
-  `descripcion` text NOT NULL
+  `usuario_id` int(11) NOT NULL,
+  `publicidad_id` int(11) NOT NULL,
+  `coste_por_click` float NOT NULL,
+  `fecha_y_hora` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB;
 
 --
--- Volcado de datos para la tabla `convenios`
+-- Volcado de datos para la tabla `clicks`
 --
 
-INSERT INTO `convenios` (`id`, `tipo`, `descripcion`) VALUES
-(1, 'electricidad', 'Contacta con Juan Perez, el <strong>mejor electricista</strong> de la comunidad.');
+INSERT INTO `clicks` (`id`, `usuario_id`, `publicidad_id`, `coste_por_click`, `fecha_y_hora`) VALUES
+(1, 1, 1, 0.3, '2024-06-03 20:40:12'),
+(2, 1, 1, 0.3, '2024-06-03 20:41:13');
 
 -- --------------------------------------------------------
 
@@ -69,7 +72,8 @@ DROP TABLE IF EXISTS `impresiones`;
 CREATE TABLE `impresiones` (
   `id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,
-  `convenio_id` int(11) NOT NULL,
+  `publicidad_id` int(11) NOT NULL,
+  `coste_por_impresion` float NOT NULL,
   `fecha_y_hora` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB;
 
@@ -77,9 +81,34 @@ CREATE TABLE `impresiones` (
 -- Volcado de datos para la tabla `impresiones`
 --
 
-INSERT INTO `impresiones` (`id`, `usuario_id`, `convenio_id`, `fecha_y_hora`) VALUES
-(1, 1, 1, '2024-06-02 20:46:42'),
-(2, 1, 1, '2024-06-02 20:47:26');
+INSERT INTO `impresiones` (`id`, `usuario_id`, `publicidad_id`, `coste_por_impresion`, `fecha_y_hora`) VALUES
+(1, 1, 1, 0, '2024-06-02 20:46:42'),
+(2, 1, 1, 0, '2024-06-02 20:47:26'),
+(3, 1, 1, 0, '2024-06-03 18:58:49'),
+(4, 1, 1, 0.005, '2024-06-03 18:59:55'),
+(5, 1, 1, 0.005, '2024-06-03 19:26:17'),
+(6, 1, 1, 0.005, '2024-06-03 19:26:28'),
+(7, 1, 1, 0.005, '2024-06-03 19:28:26'),
+(8, 1, 1, 0.005, '2024-06-03 19:28:32'),
+(9, 1, 1, 0.005, '2024-06-03 19:30:27'),
+(10, 1, 1, 0.005, '2024-06-03 19:30:34'),
+(11, 1, 1, 0.005, '2024-06-03 19:31:46'),
+(12, 1, 1, 0.005, '2024-06-03 19:32:42'),
+(13, 1, 1, 0.005, '2024-06-03 19:32:54'),
+(14, 1, 1, 0.005, '2024-06-03 19:36:31'),
+(15, 1, 1, 0.005, '2024-06-03 19:56:57'),
+(16, 1, 1, 0.005, '2024-06-03 20:07:06'),
+(17, 1, 1, 0.005, '2024-06-03 20:08:29'),
+(18, 1, 1, 0.005, '2024-06-03 20:08:59'),
+(19, 1, 1, 0.005, '2024-06-03 20:09:56'),
+(20, 1, 1, 0.005, '2024-06-03 20:10:28'),
+(21, 1, 1, 0.005, '2024-06-03 20:15:43'),
+(22, 1, 1, 0.005, '2024-06-03 20:20:13'),
+(23, 1, 1, 0.005, '2024-06-03 20:24:48'),
+(24, 1, 1, 0.005, '2024-06-03 20:31:30'),
+(25, 1, 1, 0.005, '2024-06-03 20:40:10'),
+(26, 1, 1, 0.005, '2024-06-03 20:41:11'),
+(27, 1, 1, 0.005, '2024-06-03 20:56:48');
 
 -- --------------------------------------------------------
 
@@ -132,6 +161,29 @@ CREATE TABLE `inmuebles` (
 INSERT INTO `inmuebles` (`id`, `direccion`, `propietario_usuario_id`, `inquilino_usuario_id`) VALUES
 (1, 'Gran Via, 54', 1, 3),
 (2, 'Calle de Valencia, 25', 1, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `publicidades`
+--
+
+DROP TABLE IF EXISTS `publicidades`;
+CREATE TABLE `publicidades` (
+  `id` int(11) NOT NULL,
+  `tipo` enum('fontaneria','electricidad','telefonillo','mobiliario','pagos','carpinteria','cerrajeria','pintura') NOT NULL,
+  `contenido` text NOT NULL,
+  `link` text NOT NULL,
+  `coste_por_impresion` float NOT NULL,
+  `coste_por_click` float NOT NULL
+) ENGINE=InnoDB;
+
+--
+-- Volcado de datos para la tabla `publicidades`
+--
+
+INSERT INTO `publicidades` (`id`, `tipo`, `contenido`, `link`, `coste_por_impresion`, `coste_por_click`) VALUES
+(1, 'electricidad', 'Contacta con Juan Perez, el mejor electricista de la comunidad.', 'https://www.instagram.com/electricistaj/', 0.005, 0.3);
 
 -- --------------------------------------------------------
 
@@ -189,9 +241,9 @@ ALTER TABLE `alquiler`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `convenios`
+-- Indices de la tabla `clicks`
 --
-ALTER TABLE `convenios`
+ALTER TABLE `clicks`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -210,6 +262,12 @@ ALTER TABLE `incidencias`
 -- Indices de la tabla `inmuebles`
 --
 ALTER TABLE `inmuebles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `publicidades`
+--
+ALTER TABLE `publicidades`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -235,16 +293,16 @@ ALTER TABLE `alquiler`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `convenios`
+-- AUTO_INCREMENT de la tabla `clicks`
 --
-ALTER TABLE `convenios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `clicks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `impresiones`
 --
 ALTER TABLE `impresiones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `incidencias`
@@ -257,6 +315,12 @@ ALTER TABLE `incidencias`
 --
 ALTER TABLE `inmuebles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `publicidades`
+--
+ALTER TABLE `publicidades`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `subscripcion`
