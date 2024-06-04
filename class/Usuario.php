@@ -52,6 +52,10 @@ class Usuario {
         return $this->vencimientoSubscripcion;
     }
 
+    public function getEsAdministrador() {
+        return $this->esAdministrador;
+    }
+
     public function getInmuebles() {
         return $this->inmuebles;
     }

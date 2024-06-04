@@ -14,6 +14,7 @@ $usuario = Usuario::obtenerUsuarioExistente($_SESSION['usuarioId']);
 $currentDate = new DateTime();
 $currentDate->setTime(0, 0, 0); //Quito la parte de la hora para poder comparar solo fechas
 $subscripto = ($usuario->getVencimientoSubscripcion() >= $currentDate);
+$publicidad = Publicidad::obtenerPublicidadAlAzar();
 
 ?>
 
@@ -59,6 +60,31 @@ $subscripto = ($usuario->getVencimientoSubscripcion() >= $currentDate);
                 </tbody>
             </table>
             <div class="row">
+                <div class="<?php echo ($usuario->getEsAdministrador())? "col-md-5" : "col-md-8" ?> ml-auto">
+                    <div class="card text-black bg-light mb-4">
+                    <div class="card-header">Anunciante</div>
+                    <div class="card-body">
+                        <p>
+                            <a href="visitar_publicidad.php?publicidadId=<?php echo $publicidad->getId()?>" target="_blank"><?php echo $publicidad->getContenido(); $publicidad->registrarImpresion($usuario); ?></a>
+                        </p>
+                    </div>
+                    </div>
+                </div>
+                <?php if ($usuario->getEsAdministrador()) {
+                    ?>
+                    <div class="col-md-3 ml-auto">
+                        <div class="card text-black bg-warning mb-4">
+                            <div class="card-header">Administrador</div>
+                            <div class="card-body">
+                                <p class="card-text">&Uacute;ltimos 30 d&iacute;as</p>
+                                <p class="card-text">Impresiones: <?php echo Publicidad::obtenerGananciasPorImpresiones(30) ?> &euro;</p>
+                                <p class="card-text">Clicks: <?php echo Publicidad::obtenerGananciasPorClicks(30) ?> &euro;</p>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
                 <div class="col-md-4 ml-auto">
                     <div class="card text-white <?php echo ($subscripto) ? "bg-success" : "bg-secondary" ?> mb-4">
                         <div class="card-header">Subscripci&oacute;n</div>

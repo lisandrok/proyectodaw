@@ -67,6 +67,20 @@ class Publicidad  {
         return $publicidad;
     }
 
+    public static function obtenerPublicidadAlAzar() {
+        $consulta = Conexion::consulta("SELECT id, tipo, contenido, link, coste_por_impresion, coste_por_click FROM publicidades");
+
+        //Selecciono una publicidad al azar
+        $elegirFilaAleatoria = array_rand($consulta);
+        $filaAleatoria = $consulta[$elegirFilaAleatoria];
+
+        $publicidad = null; //Declaro la variable para evitar warnings
+
+        $publicidad = new Publicidad($filaAleatoria['id'], $filaAleatoria['tipo'], $filaAleatoria['contenido'], $filaAleatoria['link'], $filaAleatoria['coste_por_impresion'], $filaAleatoria['coste_por_click']);
+
+        return $publicidad;
+    }
+
     public function registrarImpresion($usuario) {
         //Inserto registro de impresion sin indicar horario ya que el default de la tabla es current_timestamp
         Conexion::consulta("INSERT INTO impresiones (usuario_id, publicidad_id, coste_por_impresion) VALUES (" . $usuario->getId() . ", " . $this->getId() . ", '" . $this->getCostePorImpresion() . "')");
@@ -75,5 +89,27 @@ class Publicidad  {
     public function registrarClick($usuario) {
         //Inserto registro de click sin indicar horario ya que el default de la tabla es current_timestamp
         Conexion::consulta("INSERT INTO clicks (usuario_id, publicidad_id, coste_por_click) VALUES (" . $usuario->getId() . ", " . $this->getId() . ", '" . $this->getCostePorClick() . "')");
+    }
+
+    public static function obtenerGananciasPorImpresiones($dias) {
+        $ganancia = 0;
+        $consulta = Conexion::consulta("SELECT SUM(coste_por_impresion) AS ganancia FROM `impresiones` WHERE fecha_y_hora > DATE_SUB(CURDATE(), INTERVAL " . $dias . " DAY)");
+
+        foreach ($consulta as $fila) {
+            $ganancia = $fila['ganancia'];
+        }
+
+        return round($ganancia, 2);
+    }
+
+    public static function obtenerGananciasPorClicks($dias) {
+        $ganancia = 0;
+        $consulta = Conexion::consulta("SELECT SUM(coste_por_click) AS ganancia FROM `clicks` WHERE fecha_y_hora > DATE_SUB(CURDATE(), INTERVAL " . $dias . " DAY)");
+
+        foreach ($consulta as $fila) {
+            $ganancia = $fila['ganancia'];
+        }
+
+        return round($ganancia, 2);
     }
 }

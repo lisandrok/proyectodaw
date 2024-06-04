@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-06-2024 a las 01:40:30
+-- Tiempo de generación: 04-06-2024 a las 03:44:46
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.1.25
 
@@ -60,7 +60,9 @@ CREATE TABLE `clicks` (
 
 INSERT INTO `clicks` (`id`, `usuario_id`, `publicidad_id`, `coste_por_click`, `fecha_y_hora`) VALUES
 (1, 1, 1, 0.3, '2024-06-03 20:40:12'),
-(2, 1, 1, 0.3, '2024-06-03 20:41:13');
+(2, 1, 1, 0.3, '2024-06-03 20:41:13'),
+(3, 1, 2, 0.25, '2024-06-04 01:37:48'),
+(4, 1, 1, 0.3, '2024-06-04 01:41:44');
 
 -- --------------------------------------------------------
 
@@ -108,7 +110,15 @@ INSERT INTO `impresiones` (`id`, `usuario_id`, `publicidad_id`, `coste_por_impre
 (24, 1, 1, 0.005, '2024-06-03 20:31:30'),
 (25, 1, 1, 0.005, '2024-06-03 20:40:10'),
 (26, 1, 1, 0.005, '2024-06-03 20:41:11'),
-(27, 1, 1, 0.005, '2024-06-03 20:56:48');
+(27, 1, 1, 0.005, '2024-06-03 20:56:48'),
+(28, 1, 2, 0.01, '2024-06-04 01:40:56'),
+(29, 1, 1, 0.005, '2024-06-04 01:41:00'),
+(30, 1, 1, 0.005, '2024-06-04 01:41:04'),
+(31, 1, 1, 0.005, '2024-06-04 01:41:06'),
+(32, 1, 2, 0.01, '2024-06-04 01:41:07'),
+(33, 1, 2, 0.01, '2024-06-04 01:41:39'),
+(34, 1, 1, 0.005, '2024-06-04 01:41:41'),
+(35, 1, 2, 0.01, '2024-06-04 01:41:47');
 
 -- --------------------------------------------------------
 
@@ -183,7 +193,8 @@ CREATE TABLE `publicidades` (
 --
 
 INSERT INTO `publicidades` (`id`, `tipo`, `contenido`, `link`, `coste_por_impresion`, `coste_por_click`) VALUES
-(1, 'electricidad', 'Contacta con Juan Perez, el mejor electricista de la comunidad.', 'https://www.instagram.com/electricistaj/', 0.005, 0.3);
+(1, 'electricidad', 'Contacta con Juan Perez, el mejor electricista de la comunidad.', 'https://www.instagram.com/electricistaj/', 0.005, 0.3),
+(2, 'telefonillo', 'Tegui. Servicio tecnico para telefonillos. Telefono 91-991-55-00', 'https://www.tegui.es/asistencia-tecnica', 0.01, 0.25);
 
 -- --------------------------------------------------------
 
@@ -279,13 +290,13 @@ ALTER TABLE `alquiler`
 -- AUTO_INCREMENT de la tabla `clicks`
 --
 ALTER TABLE `clicks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `impresiones`
 --
 ALTER TABLE `impresiones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `incidencias`
@@ -303,7 +314,7 @@ ALTER TABLE `inmuebles`
 -- AUTO_INCREMENT de la tabla `publicidades`
 --
 ALTER TABLE `publicidades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
