@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-06-2024 a las 03:44:46
+-- Tiempo de generación: 06-06-2024 a las 16:54:15
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.1.25
 
@@ -118,7 +118,11 @@ INSERT INTO `impresiones` (`id`, `usuario_id`, `publicidad_id`, `coste_por_impre
 (32, 1, 2, 0.01, '2024-06-04 01:41:07'),
 (33, 1, 2, 0.01, '2024-06-04 01:41:39'),
 (34, 1, 1, 0.005, '2024-06-04 01:41:41'),
-(35, 1, 2, 0.01, '2024-06-04 01:41:47');
+(35, 1, 2, 0.01, '2024-06-04 01:41:47'),
+(36, 1, 2, 0.01, '2024-06-06 11:27:19'),
+(37, 1, 1, 0.005, '2024-06-06 11:29:38'),
+(38, 1, 2, 0.01, '2024-06-06 11:30:11'),
+(39, 1, 2, 0.01, '2024-06-06 11:32:05');
 
 -- --------------------------------------------------------
 
@@ -207,7 +211,7 @@ CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `nombre` tinytext NOT NULL,
   `apellido` tinytext NOT NULL,
-  `email` mediumtext NOT NULL,
+  `email` varchar(255) NOT NULL,
   `contrasena_hash` text NOT NULL,
   `telefono` tinytext NOT NULL,
   `vencimiento_subscripcion` date NOT NULL DEFAULT current_timestamp(),
@@ -219,7 +223,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `email`, `contrasena_hash`, `telefono`, `vencimiento_subscripcion`, `es_administrador`) VALUES
-(1, 'Lisandro', 'Knott', 'lisandrok@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '635-555-5555', '2024-06-03', 1),
+(1, 'Lisandro', 'Knott', 'lisandrok@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '635-555-5555', '2024-06-12', 1),
 (2, 'Juan', 'Perez', 'juan.perez@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '635-666-5555', '2024-06-04', 0),
 (3, 'Federico', 'Garcia', 'inquilino.de.ejemplo@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '999-856-221', '2024-06-04', 0),
 (4, 'Gonzalo', 'Herrera', 'inquilino.de.ejemplo.2@gmail.com', '$2y$10$e0sMD40IfvmT5bt22t95AulrEeqPBV5bh7ZnVbFBxSZ7r/EM4XFTy', '999-555-999', '2024-06-04', 0),
@@ -274,7 +278,7 @@ ALTER TABLE `publicidades`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`) USING HASH;
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -296,7 +300,7 @@ ALTER TABLE `clicks`
 -- AUTO_INCREMENT de la tabla `impresiones`
 --
 ALTER TABLE `impresiones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `incidencias`

@@ -52,9 +52,9 @@ $publicidad = Publicidad::obtenerPublicidadAlAzar();
                                 <td><?php echo $inmueble->getDireccion(); ?></td>
                                 <td><?php echo "{$inmueble->getInquilino()->getNombre()} {$inmueble->getInquilino()->getApellido()}" ; ?></td>
                                 <td><?php echo count($inmueble->getIncidencias()); ?></td>
-                                <td><a href="nuevaincidencia.php?inmuebleId=<?php echo $inmueble->getId(); ?>" class="edit-button btn btn-primary"><i class="bi bi-tools"></i></a></td>
-                                <td><a href="editarinmueble.php?id=<?php echo $inmueble->getId(); ?>" class="edit-button btn btn-secondary"><i class="bi bi-pencil"></i></a></td>
-                                <td><a href="borrarinmueble.php?id=<?php echo $inmueble->getId(); ?>" class="delete-button btn btn-danger" onclick="return confirm('Esta seguro que desea borrar este inmueble?');"><i class="bi bi-trash"></i></a></td>
+                                <td><a href="nueva_incidencia.php?inmuebleId=<?php echo $inmueble->getId(); ?>" class="edit-button btn btn-primary"><i class="bi bi-tools"></i></a></td>
+                                <td><a href="editar_inmueble.php?id=<?php echo $inmueble->getId(); ?>" class="edit-button btn btn-secondary"><i class="bi bi-pencil"></i></a></td>
+                                <td><a href="borrar_inmueble.php?id=<?php echo $inmueble->getId(); ?>" class="delete-button btn btn-danger" onclick="return confirm('Esta seguro que desea borrar este inmueble?');"><i class="bi bi-trash"></i></a></td>
                             <tr> 
                         <?php } ?>
                 </tbody>

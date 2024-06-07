@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="contenido container mt-5">
             <h2>Crear nueva incidencia</h2>
-            <form action="nuevaincidencia.php" method="POST">
+            <form action="nueva_incidencia.php" method="POST">
                 <div class="form-group">
                     <label for="tipo">Tipo</label>
                     <select name="tipo" id="tipo" class="form-control" required>
