@@ -1,4 +1,7 @@
 <?php
+
+require_once "../include/configuracion.php"; //Incluyo el archivo de configuracion con la contraseña para usuarios nuevos
+
 session_start();
 
 if (!isset($_SESSION['email'])) {
@@ -34,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     //Si el email del inquilino no existe como usuario, crearlo
     if (is_null($inquilino) && $emailInquilino !== '') {
-        $inquilino = new Usuario($nombreInquilino, $apellidoInquilino, $emailInquilino, 'Recuperar', $telefonoInquilino);
+        $inquilino = new Usuario($nombreInquilino, $apellidoInquilino, $emailInquilino, password_hash(CONTRASENA_NUEVO_USUARIO, PASSWORD_DEFAULT), $telefonoInquilino);
         //TODO: constructor de usuario deberia devolver el objeto usuario correctamente luego de insertarlo en la base de datos
         $inquilino = Usuario::obtenerUsuarioExistentePorEmail($emailInquilino);
     }
