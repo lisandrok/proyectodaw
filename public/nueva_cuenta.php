@@ -11,7 +11,6 @@ if (isset($_SESSION['email'])) {
     exit();
 }
 
-//TODO: usar una contrasena encriptada
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = $_POST['nombre'];
     $apellido = $_POST['apellido'];
@@ -55,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php require '../include/nav.php'; ?>
 
-        <div class="contenido container mt-5 col-md-6"> <!-- TODO: Validaciones sobre todo de la contrasena -->
+        <div class="contenido container mt-5 col-md-6">
             <h2>Crear nueva cuenta</h2>
                 <form action="nueva_cuenta.php" method="POST" onsubmit="return validarContrasena();">
                     <div class="row">

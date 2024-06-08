@@ -5,8 +5,6 @@ spl_autoload_register(function ($class) {
     require "../class/" . $class . ".php";
 });
 
-//TODO: usar una contrasena encriptada
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $contrasena = $_POST['contrasena'];
