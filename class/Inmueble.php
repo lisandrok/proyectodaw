@@ -39,13 +39,18 @@ class Inmueble {
         $this->direccion = $direccion;
     }
 
+    public function setInquilino($inquilino) {
+        $this->inquilino = $inquilino;
+    }
+
     public function agregarIncidencia($tipo, $titulo, $descripcion, $usuario) {
         //Inserto la incidencia en la base de datos, omito el id ya que es un autoincrement y el estado y la fecha_y_hora que tienen defaults
         Conexion::consulta("INSERT INTO incidencias (tipo, titulo, descripcion, usuario_id, inmueble_id) VALUES ('" . $tipo . "', '" . $titulo . "', '" . $descripcion . "', " . $usuario->getId() . ", " . $this->getId() . ")");
     }
 
     public function actualizarInmuebleEnBaseDatos() {
-        Conexion::consulta("UPDATE inmuebles SET direccion = '". $this->getDireccion() ."' WHERE id=" . $this->getId());
+        $inquilinoUsuarioId = (!is_null($this->getInquilino()))? $this->getInquilino()->getId() : 0;
+        Conexion::consulta("UPDATE inmuebles SET direccion = '". $this->getDireccion() ."', inquilino_usuario_id = ". $inquilinoUsuarioId ." WHERE id=" . $this->getId());
     }
 
     public function eliminarInmueble() {

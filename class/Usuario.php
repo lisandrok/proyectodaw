@@ -24,6 +24,7 @@ class Usuario {
             $this->vencimientoSubscripcion = new DateTime($vencimientoSubscripcion);
             $this->inmuebles = $inmuebles;
         } else if ($id === null) { //TODO: Controlar si el usuario pudo crearse
+            //TODO: Luego de insertar, habria que obtener el id del usuario y rellenar todas las propiedades del objeto para que no queden en NULL
             Conexion::consulta("INSERT INTO usuarios (nombre, apellido, email, contrasena_hash, telefono, vencimiento_subscripcion, es_administrador) VALUES ('".$nombre."', '".$apellido."', '".$email."', '".$contrasenaHash."', '".$telefono."', DATE_ADD(CURDATE(), INTERVAL 10 DAY), 0)");
         }
     }
@@ -92,5 +93,16 @@ class Usuario {
             $usuario = new Usuario($fila['nombre'], $fila['apellido'], $fila['email'], $fila['contrasena_hash'], $fila['telefono'], $fila['vencimiento_subscripcion'], $fila['es_administrador'], $inmuebles, $fila['id']);
         }
         return $usuario;
+    }
+
+    public static function obtenerUsuarioExistentePorEmail($email) {
+        $usuario = null; //Declaro la variable para no tener warnings
+        $consulta = Conexion::consulta("SELECT id FROM usuarios WHERE email='" . $email . "'");
+
+        foreach ($consulta as $fila) {
+            $usuario = Usuario::obtenerUsuarioExistente($fila["id"]);
+        }
+        return $usuario;
+
     }
 }

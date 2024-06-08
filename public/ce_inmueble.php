@@ -26,6 +26,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $edicion = false; //Declaro la variable para no tener warnings
     $direccion = $_POST['direccion'];
+    $emailInquilino = $_POST['emailInquilino'];
+    $nombreInquilino = $_POST['nombreInquilino'];
+    $apellidoInquilino = $_POST['apellidoInquilino'];
+    $telefonoInquilino = $_POST['telefonoInquilino'];
+    $inquilino = Usuario::obtenerUsuarioExistentePorEmail($emailInquilino);
+    
+    //Si el email del inquilino no existe como usuario, crearlo
+    if (is_null($inquilino) && $emailInquilino !== '') {
+        $inquilino = new Usuario($nombreInquilino, $apellidoInquilino, $emailInquilino, 'Recuperar', $telefonoInquilino);
+        //TODO: constructor de usuario deberia devolver el objeto usuario correctamente luego de insertarlo en la base de datos
+        $inquilino = Usuario::obtenerUsuarioExistentePorEmail($emailInquilino);
+    }
 
     if (isset($_POST['inmuebleId'])) {
         $inmuebleId = $_POST['inmuebleId'];
@@ -35,10 +47,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($edicion) {
         $inmueble->setDireccion($direccion);
+        $inmueble->setInquilino($inquilino);
         $inmueble->actualizarInmuebleEnBaseDatos();
     } else {
         //Creo el inmueble
-        $inmueble = new Inmueble($direccion, null, null, null, $usuario);
+        $inmueble = new Inmueble($direccion, $inquilino, null, null, $usuario);
     }
     header('Location: tablero.php'); //Redirecciona al tablero de control despues de crear o editar el inmueble
     exit();
@@ -63,6 +76,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="direccion">Direcci&oacute;n</label>
                     <input type="text" name="direccion" id="direccion" class="form-control" <?php echo ($edicion)? "value='". $inmueble->getDireccion() ."'" : ""?>required>
                 </div>
+                <div class="form-group">
+                    <label for="emailInquilino">Email del inquilino (si no existe un usuario con este email, se creara una nuevo)</label>
+                    <input type="text" name="emailInquilino" id="emailInquilino" class="form-control" <?php echo ($edicion && !is_null($inmueble->getInquilino())) ? "value='". $inmueble->getInquilino()->getEmail() ."'" : ""?>>
+                </div>
+                <div class="form-group">
+                    <label for="nombreInquilino">Nombre del inquilino (si ya existe un usuario con el email del inquilino, este campo se ignora)</label>
+                    <input type="text" name="nombreInquilino" id="nombreInquilino" class="form-control" <?php echo ($edicion && !is_null($inmueble->getInquilino()))? "value='". $inmueble->getInquilino()->getNombre() ."'" : ""?>>
+                </div>
+                <div class="form-group">
+                    <label for="apellidoInquilino">Apellido del inquilino (si ya existe un usuario con el email del inquilino, este campo se ignora)</label>
+                    <input type="text" name="apellidoInquilino" id="apellidoInquilino" class="form-control" <?php echo ($edicion && !is_null($inmueble->getInquilino()))? "value='". $inmueble->getInquilino()->getApellido() ."'" : ""?>>
+                </div>
+                <div class="form-group">
+                    <label for="telefonoInquilino">Telefono del inquilino (si ya existe un usuario con el email del inquilino, este campo se ignora)</label>
+                    <input type="text" name="telefonoInquilino" id="telefonoInquilino" class="form-control" <?php echo ($edicion && !is_null($inmueble->getInquilino()))? "value='". $inmueble->getInquilino()->getTelefono() ."'" : ""?>>
+                </div>
+
                 <?php
                 if ($edicion) {
                     ?>
