@@ -57,6 +57,16 @@ class Inmueble {
         Conexion::consulta("DELETE FROM inmuebles WHERE id=" . $this->getId());
     }
 
+    public function obtenerUsuarioPropietarioDeInmueble(){
+        $consulta = Conexion::consulta("SELECT propietario_usuario_id FROM inmuebles WHERE id =" . $this->getId());
+        $usuario = null; //Declaro variable para evitar warnings
+
+        foreach ($consulta as $fila) {
+            $usuario = Usuario::obtenerUsuarioExistente($fila['propietario_usuario_id']);
+        }
+        return $usuario;
+    }
+
     public static function obtenerInmuebleExistente($id) {
         //Primero obtengo las posibles incidencias del inmueble ya que las voy a necesitar para instanciarlo
         $consulta = Conexion::consulta("SELECT id, tipo, titulo, descripcion, estado, usuario_id, fecha_y_hora FROM incidencias WHERE inmueble_id=" . $id);
@@ -73,5 +83,16 @@ class Inmueble {
             $inmueble = new Inmueble($fila['direccion'], Usuario::obtenerUsuarioExistente($fila['inquilino_usuario_id']), $incidencias, $fila['id']);
         }
         return $inmueble;
+    }
+
+    public static function obtenerInmueblesExistentesPorInquilinoId($inquilinoId) {
+        $inmuebles = [];
+        $consulta = Conexion::consulta("SELECT id FROM inmuebles WHERE inquilino_usuario_id=" . $inquilinoId);
+
+        foreach ($consulta as $fila) {
+            $inmueble = Inmueble::obtenerInmuebleExistente($fila["id"]);
+            $inmuebles[] = $inmueble;
+        }
+        return $inmuebles;
     }
 }
