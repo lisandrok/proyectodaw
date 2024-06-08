@@ -76,6 +76,7 @@ class Usuario {
     }
 
     public static function obtenerUsuarioExistente($id) {
+        $usuario = null; //Declaro la variable para no tener warnings
         //Primero obtengo los inmuebles del usuario ya que debo utilizarlos para crear el usuario
         $consulta = Conexion::consulta("SELECT id, direccion, inquilino_usuario_id FROM inmuebles WHERE propietario_usuario_id=" . $id);
         $inmuebles = [];
