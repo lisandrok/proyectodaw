@@ -33,41 +33,44 @@ $publicidad = Publicidad::obtenerPublicidadAlAzar();
 
             <!-- TODO: Agregar logica para cuando el usuario no tiene ninguna propiedad -->
             <div class="row">
-            <div class="col-md-12 ml-auto">
-            <div class="table-responsive">
-            <div class="card mb-3">
-            <table class="table table-hover mb-0">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Direcci&oacute;n</th>
-                        <th scope="col">Inquilino</th>
-                        <th scope="col">Incidencias</th>
-                        <th scope="col">Editar</th>
-                        <th scope="col">Borrar</th>
-                    </tr>
-                </thead>
-                <tbody>                
-                    <?php
-                        foreach ($usuario->getInmuebles() as $inmueble) {
-                            ?>
-                            <tr>
-                                <th scope="row" class="align-middle"><?php echo $inmueble->getId(); ?></th>
-                                <td class="align-middle"><?php echo $inmueble->getDireccion(); ?></td>
-                                <td class="align-middle"><?php echo ($inmueble->getInquilino())? "{$inmueble->getInquilino()->getNombre()} {$inmueble->getInquilino()->getApellido()}" : "Vacante" ; ?></td>
-                                <td class="align-middle"><?php echo count($inmueble->getIncidencias()); ?><a href="nueva_incidencia.php?inmuebleId=<?php echo $inmueble->getId(); ?>" class="edit-button btn-sm btn-primary ml-3"><i class="bi bi-plus-lg"></i></a></td>
-                                <td class="align-middle"><a href="ce_inmueble.php?inmuebleId=<?php echo $inmueble->getId(); ?>" class="edit-button btn btn-secondary"><i class="bi bi-pencil"></i></a></td>
-                                <td class="align-middle"><a href="borrar_inmueble.php?inmuebleId=<?php echo $inmueble->getId(); ?>" class="delete-button btn btn-danger" onclick="return confirm('Esta seguro que desea borrar este inmueble?');"><i class="bi bi-trash"></i></a></td>
-                            <tr> 
-                        <?php } 
-                        if (!$subscripto && count($usuario->getInmuebles()) >= 3) {
-                            ?> <tr><td colspan="6" class="text-center"><a href="#" class="btn btn-primary w-50 disabled"><i class="bi bi-plus"></i> Actualiza a Plus para agregar m&aacute;s inmuebles</a></td></tr> <?php
-                        } else {
-                            ?> <tr><td colspan="6" class="text-center"><a href="ce_inmueble.php" class="btn btn-primary w-50"><i class="bi bi-plus"></i> Agregar nuevo inmueble</a></td></tr> <?php
-                        } ?>
-                </tbody>
-            </table>
-            </div></div></div></div>
+                <div class="col-md-12 ml-auto">
+                    <div class="table-responsive">
+                        <div class="card mb-3">
+                            <table class="table table-hover mb-0">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Direcci&oacute;n</th>
+                                        <th scope="col">Inquilino</th>
+                                        <th scope="col">Incidencias</th>
+                                        <th scope="col">Editar</th>
+                                        <th scope="col">Borrar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>                
+                                    <?php
+                                        foreach ($usuario->getInmuebles() as $inmueble) {
+                                            ?>
+                                            <tr>
+                                                <th scope="row" class="align-middle"><?php echo $inmueble->getId(); ?></th>
+                                                <td class="align-middle"><?php echo $inmueble->getDireccion(); ?></td>
+                                                <td class="align-middle"><?php echo ($inmueble->getInquilino())? "{$inmueble->getInquilino()->getNombre()} {$inmueble->getInquilino()->getApellido()}" : "Vacante" ; ?></td>
+                                                <td class="align-middle"><?php echo count($inmueble->getIncidencias()); ?><a href="nueva_incidencia.php?inmuebleId=<?php echo $inmueble->getId(); ?>" class="edit-button btn-sm btn-primary ml-3"><i class="bi bi-plus-lg"></i></a></td>
+                                                <td class="align-middle"><a href="ce_inmueble.php?inmuebleId=<?php echo $inmueble->getId(); ?>" class="edit-button btn btn-secondary"><i class="bi bi-pencil"></i></a></td>
+                                                <td class="align-middle"><a href="borrar_inmueble.php?inmuebleId=<?php echo $inmueble->getId(); ?>" class="delete-button btn btn-danger" onclick="return confirm('Esta seguro que desea borrar este inmueble?');"><i class="bi bi-trash"></i></a></td>
+                                            <tr> 
+                                        <?php } 
+                                        if (!$subscripto && count($usuario->getInmuebles()) >= 3) {
+                                            ?> <tr><td colspan="6" class="text-center"><a href="#" class="btn btn-primary w-50 disabled"><i class="bi bi-plus"></i> Actualiza a Plus para agregar m&aacute;s inmuebles</a></td></tr> <?php
+                                        } else {
+                                            ?> <tr><td colspan="6" class="text-center"><a href="ce_inmueble.php" class="btn btn-primary w-50"><i class="bi bi-plus"></i> Agregar nuevo inmueble</a></td></tr> <?php
+                                        } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
                 
             <div class="row">
                 <div class="<?php echo ($usuario->getEsAdministrador())? "col-md-5" : "col-md-8" ?> ml-auto">
