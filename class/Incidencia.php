@@ -42,7 +42,7 @@ class Incidencia {
     }
 
     public static function obtenerIncidenciaExistente($id){
-        $consulta = Conexion::consulta("SELECT id, tipo, titulo, descripcion, estado, fecha_y_hora FROM incidencias WHERE inmueble_id=" . $id);
+        $consulta = Conexion::consulta("SELECT id, tipo, titulo, descripcion, estado, fecha_y_hora FROM incidencias WHERE id=" . $id);
 
         $incidencia = null;
 
