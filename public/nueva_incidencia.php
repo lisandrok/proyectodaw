@@ -87,7 +87,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             link.href = "visitar_publicidad.php?publicidadId=" + publicidad.id;
                             link.target = "_blank";
                             link.textContent =publicidad.contenido;
+                            document.getElementById('publicidad').replaceChildren(); //Limpiamos el div
                             document.getElementById('publicidad').appendChild(link); //Agregamos el link con el contenido
+                        } else if (requestAjax.status === 404) {
+                            document.getElementById('publicidad').replaceChildren(); //Dejamo el div vacio
                         }
                     }
                 };
