@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-06-2024 a las 16:28:25
+-- Tiempo de generación: 08-06-2024 a las 17:41:36
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.1.25
 
@@ -302,7 +302,47 @@ INSERT INTO `impresiones` (`id`, `usuario_id`, `publicidad_id`, `coste_por_impre
 (216, 1, 2, 0.01, '2024-06-08 13:53:06'),
 (217, 1, 1, 0.005, '2024-06-08 13:54:06'),
 (218, 1, 2, 0.01, '2024-06-08 13:54:31'),
-(219, 1, 1, 0.005, '2024-06-08 13:54:35');
+(219, 1, 1, 0.005, '2024-06-08 13:54:35'),
+(220, 1, 1, 0.005, '2024-06-08 14:31:30'),
+(221, 1, 1, 0.005, '2024-06-08 14:31:49'),
+(222, 1, 2, 0.01, '2024-06-08 14:32:00'),
+(223, 1, 2, 0.01, '2024-06-08 14:32:32'),
+(224, 1, 1, 0.005, '2024-06-08 14:35:14'),
+(225, 1, 2, 0.01, '2024-06-08 14:36:08'),
+(226, 1, 2, 0.01, '2024-06-08 14:36:10'),
+(227, 1, 1, 0.005, '2024-06-08 14:36:43'),
+(228, 1, 2, 0.01, '2024-06-08 14:37:20'),
+(229, 1, 1, 0.005, '2024-06-08 14:37:44'),
+(230, 1, 1, 0.005, '2024-06-08 14:38:06'),
+(231, 1, 2, 0.01, '2024-06-08 14:58:55'),
+(232, 1, 2, 0.01, '2024-06-08 14:59:09'),
+(233, 1, 2, 0.01, '2024-06-08 15:00:23'),
+(234, 1, 1, 0.005, '2024-06-08 15:00:29'),
+(235, 1, 1, 0.005, '2024-06-08 15:05:29'),
+(236, 1, 1, 0.005, '2024-06-08 15:05:51'),
+(237, 1, 2, 0.01, '2024-06-08 15:05:53'),
+(238, 1, 4, 0.08, '2024-06-08 15:13:17'),
+(239, 1, 1, 0.005, '2024-06-08 15:13:21'),
+(240, 1, 4, 0.08, '2024-06-08 15:13:26'),
+(241, 1, 1, 0.005, '2024-06-08 15:13:28'),
+(242, 1, 2, 0.01, '2024-06-08 15:13:30'),
+(243, 1, 5, 0.007, '2024-06-08 15:13:32'),
+(244, 1, 6, 0.012, '2024-06-08 15:13:36'),
+(245, 1, 3, 0, '2024-06-08 15:13:38'),
+(246, 1, 4, 0.08, '2024-06-08 15:13:41'),
+(247, 1, 1, 0.005, '2024-06-08 15:13:43'),
+(248, 1, 2, 0.01, '2024-06-08 15:13:45'),
+(249, 1, 5, 0.007, '2024-06-08 15:13:47'),
+(250, 1, 4, 0.08, '2024-06-08 15:33:45'),
+(251, 1, 2, 0.01, '2024-06-08 15:33:46'),
+(252, 1, 1, 0.005, '2024-06-08 15:33:48'),
+(253, 1, 5, 0.007, '2024-06-08 15:33:54'),
+(254, 1, 5, 0.007, '2024-06-08 15:34:01'),
+(255, 1, 4, 0.08, '2024-06-08 15:35:22'),
+(256, 1, 4, 0.08, '2024-06-08 15:36:14'),
+(257, 1, 2, 0.01, '2024-06-08 15:36:18'),
+(258, 1, 1, 0.005, '2024-06-08 15:36:19'),
+(259, 1, 6, 0.012, '2024-06-08 15:36:24');
 
 -- --------------------------------------------------------
 
@@ -357,7 +397,7 @@ INSERT INTO `inmuebles` (`id`, `direccion`, `propietario_usuario_id`, `inquilino
 (1, 'Gran Via, 54', 1, 3),
 (2, 'Calle de Valencia, 25', 1, 4),
 (5, 'Ronda de Atocha, 3', 2, 0),
-(6, 'Calle de prueba, 8', 1, 7);
+(6, 'Calle de prueba, 8', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -381,7 +421,11 @@ CREATE TABLE `publicidades` (
 
 INSERT INTO `publicidades` (`id`, `tipo`, `contenido`, `link`, `coste_por_impresion`, `coste_por_click`) VALUES
 (1, 'electricidad', 'Contacta con Juan Perez, el mejor electricista de la comunidad.', 'https://www.instagram.com/electricistaj/', 0.005, 0.3),
-(2, 'telefonillo', 'Tegui. Servicio tecnico para telefonillos. Telefono 91-991-55-00', 'https://www.tegui.es/asistencia-tecnica', 0.01, 0.25);
+(2, 'telefonillo', 'Tegui. Servicio tecnico para telefonillos. Telefono 91-991-55-00', 'https://www.tegui.es/asistencia-tecnica', 0.01, 0.25),
+(3, 'pintura', 'La pintureria - La mayor variedad de colores disponibles para decorar su hugar.', 'https://lapintureria.es/', 0, 1),
+(4, 'fontaneria', 'Fontaneros Madrd - Aceptamos tarjeta y no le cobramos la visita!', 'https://fontanerosmadrid.eu/', 0.08, 0.5),
+(5, 'mobiliario', 'IKEA - La tienda sueca donde puede comprar todo su mobiliario', 'http://ikea.es', 0.007, 0.01),
+(6, 'cerrajeria', 'Cerrajero Madrid. Apertura de puertas. Cambios de cerradura. Atendemos urgencias.', 'https://www.cerrajeromadrid.es/', 0.012, 0.87);
 
 -- --------------------------------------------------------
 
@@ -505,7 +549,7 @@ ALTER TABLE `clicks`
 -- AUTO_INCREMENT de la tabla `impresiones`
 --
 ALTER TABLE `impresiones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=220;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=260;
 
 --
 -- AUTO_INCREMENT de la tabla `incidencias`
@@ -523,13 +567,13 @@ ALTER TABLE `inmuebles`
 -- AUTO_INCREMENT de la tabla `publicidades`
 --
 ALTER TABLE `publicidades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
