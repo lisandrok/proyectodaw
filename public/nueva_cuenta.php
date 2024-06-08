@@ -34,6 +34,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php require '../include/head.php' ?>
 
+        <script>
+            //Validacion de javascript de que la contrasena ingresada dos veces sea la misma
+            function validarContrasena() {
+                var contrasena = document.getElementById("contrasena").value;
+                var repetirContrasena = document.getElementById("repetirContrasena").value;
+                var errorMsg = document.getElementById("mensajeError");
+
+                if (contrasena !== repetirContrasena) {
+                    errorMsg.textContent = "Las contraseñas no coinciden";
+                    return false;
+                } else {
+                    errorMsg.textContent = "";
+                    return true;
+                }
+            }
+        </script>
     </head>
     <body>
 
@@ -41,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="contenido container mt-5 col-md-6"> <!-- TODO: Validaciones sobre todo de la contrasena -->
             <h2>Crear nueva cuenta</h2>
-                <form action="nueva_cuenta.php" method="POST">
+                <form action="nueva_cuenta.php" method="POST" onsubmit="return validarContrasena();">
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
@@ -79,12 +95,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         <div class="col">
                             <div class="form-group">
-                                <label for="repetircontrasena">Repetir contrase&ntilde;a</label>
-                                <input type="password" name="repetircontrasena" id="repetircontrasena" class="form-control" required>
+                                <label for="repetirContrasena">Repetir contrase&ntilde;a</label>
+                                <input type="password" name="repetirContrasena" id="repetirContrasena" class="form-control" required>
                             </div>
                         </div>
                     </div>
- 
+                    <div id="mensajeError" class="text-danger mb-3"></div>
                     <button type="submit" class="btn btn-primary">Crear</button>
                 </form>
         </div>
