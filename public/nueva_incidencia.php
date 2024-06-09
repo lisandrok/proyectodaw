@@ -14,6 +14,16 @@ $usuario = Usuario::obtenerUsuarioExistente($_SESSION['usuarioId']);
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $inmuebleId = $_GET['inmuebleId'];
+    //Este me permite devolver al usuario a la misma pantalla desde la cual vino
+    if (isset($_GET['origen'])) {
+        if ($_GET['origen'] == "incidencias") {
+            $origen = $_GET['origen'] . ".php?inmuebleId=" . $inmuebleId; 
+        } else {
+            $origen = $_GET['origen'] . ".php"; 
+        }
+    } else {
+        $origen = './';
+    }
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -21,10 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titulo = $_POST['titulo'];
     $descripcion = $_POST['descripcion'];
     $inmueble = Inmueble::obtenerInmuebleExistente($_POST['inmuebleId']);
-
+    $origen = $_POST['origen'];
     $inmueble->agregarIncidencia($tipo, $titulo, $descripcion, $usuario);
 
-    header('Location: tablero.php'); //redirecciona al tablero de control
+    header('Location: '. $origen); //redirecciona al tablero de control
     exit();
 }
 ?>
@@ -62,7 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <textarea name="descripcion" id="descripcion" class="form-control" rows="4" required></textarea>
                 </div>
                 <input type="hidden" name="inmuebleId" id="inmuebleId" value="<?php echo $inmuebleId?>">
+                <input type="hidden" name="origen" id="origen" value="<?php echo $origen?>">
                 <button type="submit" class="btn btn-primary">Crear</button>
+                <a href="<?php echo $origen?>">Cancelar</a>
             </form>
     </div>
 

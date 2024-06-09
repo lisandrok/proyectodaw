@@ -15,7 +15,11 @@ class Inmueble {
             $this->inquilino = $inquilino;
             $this->incidencias = $incidencias;
         } else if ($id === null) { //TODO: controlar si el inmueble pudo crearse
-            Conexion::consulta("INSERT INTO inmuebles (direccion, propietario_usuario_id) VALUES ('".$direccion."', ".$usuario->getId().")");
+            if ($inquilino == null) {
+                Conexion::consulta("INSERT INTO inmuebles (direccion, propietario_usuario_id) VALUES ('".$direccion."', ".$usuario->getId().")");
+            } else {
+                Conexion::consulta("INSERT INTO inmuebles (direccion, propietario_usuario_id, inquilino_usuario_id) VALUES ('".$direccion."', ".$usuario->getId().", ". $inquilino->getId() . ")");
+            }
         }
     }
 
@@ -74,7 +78,7 @@ class Inmueble {
         foreach($consulta as $fila) {
             $incidencia = Incidencia::obtenerIncidenciaExistente($fila["id"]);
             $incidencias[] = $incidencia;
-        }
+            }
 
         //Obtengo los datos del inmueble desde la db
         $consulta = Conexion::consulta("SELECT id, direccion, inquilino_usuario_id FROM inmuebles WHERE id=" . $id);

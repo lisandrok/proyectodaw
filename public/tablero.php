@@ -55,7 +55,7 @@ $inmueblesComoInquilino = Inmueble::obtenerInmueblesExistentesPorInquilinoId($us
                                                 <tr>
                                                     <td class="align-middle"><?php echo $inmueble->getDireccion(); ?></td>
                                                     <td class="align-middle"><?php echo ($inmueble->getInquilino())? "{$inmueble->getInquilino()->getNombre()} {$inmueble->getInquilino()->getApellido()}" : "Vacante" ; ?></td>
-                                                    <td class="align-middle"><?php echo count($inmueble->getIncidencias()); ?><a href="nueva_incidencia.php?inmuebleId=<?php echo $inmueble->getId(); ?>" class="edit-button btn-sm btn-primary ml-3"><i class="bi bi-plus-lg"></i></a></td>
+                                                    <td class="align-middle"><a href="incidencias.php?inmuebleId=<?php echo $inmueble->getId()?>"><?php echo count($inmueble->getIncidencias()); ?></a><a href="nueva_incidencia.php?inmuebleId=<?php echo $inmueble->getId(); ?>&origen=tablero" class="edit-button btn-sm btn-primary ml-3"><i class="bi bi-plus-lg"></i></a></td>
                                                     <td class="align-middle"><a href="ce_inmueble.php?inmuebleId=<?php echo $inmueble->getId(); ?>" class="edit-button btn btn-secondary"><i class="bi bi-pencil"></i></a></td>
                                                     <td class="align-middle"><a href="borrar_inmueble.php?inmuebleId=<?php echo $inmueble->getId(); ?>" class="delete-button btn btn-danger" onclick="return confirm('Esta seguro que desea borrar este inmueble?');"><i class="bi bi-trash"></i></a></td>
                                                 <tr> 
@@ -112,7 +112,7 @@ $inmueblesComoInquilino = Inmueble::obtenerInmueblesExistentesPorInquilinoId($us
                                 <tr>
                                     <td><?php echo $inmueble->getDireccion(); ?></td>
                                     <td><?php echo"{$usuarioPropietario->getNombre()} {$usuarioPropietario->getApellido()}"?></td>
-                                    <td><?php echo count($inmueble->getIncidencias()); ?><a href="nueva_incidencia.php?inmuebleId=<?php echo $inmueble->getId(); ?>" class="edit-button btn-sm btn-primary ml-3"><i class="bi bi-plus-lg"></i></a></td>
+                                    <td><a href="incidencias.php?inmuebleId=<?php echo $inmueble->getId()?>"><?php echo count($inmueble->getIncidencias()); ?></a><a href="nueva_incidencia.php?inmuebleId=<?php echo $inmueble->getId(); ?>&origen=tablero" class="edit-button btn-sm btn-primary ml-3"><i class="bi bi-plus-lg"></i></a></td>
                                 </tr>
                                     
                                     <?php
