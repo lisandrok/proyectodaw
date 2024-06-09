@@ -2,7 +2,7 @@
 
 class Incidencia {
     private $id;
-    private $tipo;
+    public $tipo;
     private $titulo;
     private $descripcion;
     private $estado;
@@ -10,7 +10,7 @@ class Incidencia {
 
     public function __construct ($id, $tipo, $titulo, $descripcion, $estado, $fecha_y_hora) {
         $this->id = $id;
-        $this->$tipo = $tipo;
+        $this->tipo = $tipo;
         $this->titulo = $titulo;
         $this->descripcion = $descripcion;
         $this->estado = $estado;
