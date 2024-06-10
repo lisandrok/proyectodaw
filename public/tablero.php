@@ -95,32 +95,36 @@ $inmueblesComoInquilino = Inmueble::obtenerInmueblesExistentesPorInquilinoId($us
                         ?>
 
                     <div class="card text-black bg-light mb-3">
-                        <table class="table table-hover mb-0">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>Inquilino en</th>
-                                    <th>Propietario</th>
-                                    <th>Incidencias</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>Inquilino en</th>
+                                            <th>Propietario</th>
+                                            <th>Incidencias</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                                <?php foreach ($inmueblesComoInquilino as $inmueble) {
-                                    $usuarioPropietario = $inmueble->obtenerUsuarioPropietarioDeInmueble();
-                                    ?>
+                                        <?php foreach ($inmueblesComoInquilino as $inmueble) {
+                                            $usuarioPropietario = $inmueble->obtenerUsuarioPropietarioDeInmueble();
+                                            ?>
 
-                                <tr>
-                                    <td><?php echo $inmueble->getDireccion(); ?></td>
-                                    <td><?php echo"{$usuarioPropietario->getNombre()} {$usuarioPropietario->getApellido()}"?></td>
-                                    <td><a href="incidencias.php?inmuebleId=<?php echo $inmueble->getId()?>"><?php echo count($inmueble->getIncidencias()); ?></a><a href="nueva_incidencia.php?inmuebleId=<?php echo $inmueble->getId(); ?>&origen=tablero" class="edit-button btn-sm btn-primary ml-3"><i class="bi bi-plus-lg"></i></a></td>
-                                </tr>
-                                    
-                                    <?php
-                                }
-                                ?>
+                                        <tr>
+                                            <td><?php echo $inmueble->getDireccion(); ?></td>
+                                            <td><?php echo"{$usuarioPropietario->getNombre()} {$usuarioPropietario->getApellido()}"?></td>
+                                            <td><a href="incidencias.php?inmuebleId=<?php echo $inmueble->getId()?>"><?php echo count($inmueble->getIncidencias()); ?></a><a href="nueva_incidencia.php?inmuebleId=<?php echo $inmueble->getId(); ?>&origen=tablero" class="edit-button btn-sm btn-primary ml-3"><i class="bi bi-plus-lg"></i></a></td>
+                                        </tr>
+                                            
+                                            <?php
+                                        }
+                                        ?>
 
-                            </tbody>
-                        </table>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
 
                         <?php
